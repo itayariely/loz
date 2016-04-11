@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>שם:</strong>
+  <%= @friend.name %>
+</p>
+
+<p>
+  <strong>שם משפחה:</strong>
+  <%= @friend.lname %>
+</p>
+
+<p>
+  <strong>טלפון:</strong>
+  <%= @friend.phone %>
+</p>
+
+<p>
+  <strong>דוא"ל":</strong>
+  <%= @friend.email %>
+</p>
+
+<p>
+  <strong>תאריך לידה:</strong>
+  <%= @friend.birth_date %>
+</p>
+<% if @friend.circuls.any? %>
+  <p>
+
+      <strong>מעגלי שייכות:</strong>
+      <ul>
+        <% get_friend_circuls(@friend.circuls).each do |circul| %>
+          <li>
+            <%= circul %>
+          </li>
+        <% end %>
+      </ul>
+  
+  </p>
+<% end %>
+<!--
+<p>
+    <strong>מעגלי שייכות:</strong>
+    <ul>
+      <% aaa = [] %>
+      <% @friend.circuls.each do |circul| %>
+        <li>
+          <%= aaa << father_shower(circul) %>
+        </li>
+      <% end %>
+      <%= aaa %>
+    </ul>
+</p> -->
+<%= link_to 'Edit', edit_friend_path(@friend) %> |
+<%= link_to 'Back', friends_path %>

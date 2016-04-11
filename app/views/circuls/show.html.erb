@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>שם:</strong>
+  <%= @circul.name %>
+</p>
+
+<% if not @circul.father_circul_id == 0 %>
+  <p>
+    <strong>משוייך למעגל:</strong>
+    <%= @circul.father.name  %>
+  </p>
+<% end %>
+<% if @circul.friends.any? %>
+  <p>
+    <strong><%= @circul.friends.count %> חברות וחברים במעגל ללא מעגלי המשנה:</strong>
+    <ul>
+      <% @circul.friends.each do |friend| %>
+      <li>
+        <%= link_to friend.name, friend %>
+      </li>
+      <% end %>
+    </ul>
+  </p>
+  <p>
+    <% a = get_circul_friends(@circul) %>
+    <% friends = @friends.where(id: a) %>
+    <strong><%= a.count %> חברות וחברים במעגל ובמעגלי המשנה:</strong>
+    <ul>
+      <% friends.each do |friend|  %>
+      <li>
+        <%= link_to friend.name, friend %>
+      </li>
+      <% end %>
+    </ul>
+  </p>
+<% end %>
+  
+
+<%= link_to 'עריכה', edit_circul_path(@circul) %> |
+<%= link_to 'חזרה', circuls_path %>

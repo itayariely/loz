@@ -1,0 +1,26 @@
+<%= form_for(@circul) do |f| %>
+  <% if @circul.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@circul.errors.count, "error") %> prohibited this circul from being saved:</h2>
+
+      <ul>
+      <% @circul.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :father_circul_id %><br>
+    <%= f.number_field :father_circul_id %>
+  </div>
+  <%= collection_check_boxes(:circul, :friend_ids, Friend.all, :id, :name_with_initial)%>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

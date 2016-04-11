@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>רשימת המעגלים</h1>
+<!--
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Father circul</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead> -->
+
+  <!-- <tbody> -->
+  <ul class="tree">
+    <% @circuls.each do |circul| %>
+
+        <li>
+          <div class="links_shower">
+            <%= link_to circul.name, circul  %>
+            <span class="plus">+</span>
+            <span class="links">
+              <%= link_to 'עריכה', edit_circul_path(circul) %>
+              <%= link_to 'מחיקה', circul, method: :delete, data: { confirm: 'למחוק?' } %>
+            </span>
+        </div>
+        <% if circul.children.any? %>
+          <%= render circul %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'הוספת מעגל', new_circul_path %>
