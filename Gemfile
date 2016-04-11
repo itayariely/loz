@@ -45,4 +45,4 @@ group :development do
   gem 'spring'
 end
 
-gem "wysiwyg-rails"
+gem 'ckeditor_rails'

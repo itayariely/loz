@@ -33,11 +33,36 @@
 <br>
 
 <%= link_to 'New Friend', new_friend_path %>
-<form>
-  <textarea id="edit" name="content"></textarea>
-</form>
+
+<<%= form_for @friends.first do |f| %>
+
+  <%= f.text_area :name, :class => 'ckeditor' %>
+  <%= f.submit %>
+<% end %>
+
 <script>
-    $(function() {
-        $('#edit').froalaEditor()
-    });
+$('.ckeditor').ckeditor({
+// optional config
+});
+$(document).ready(function() {
+  // http://ckeditor.com/latest/samples/toolbarconfigurator/index.html#basic to config
+  CKEDITOR.config.toolbarGroups = [
+    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+    '/',
+    { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+    { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+    { name: 'forms', groups: [ 'forms' ] },
+    { name: 'links', groups: [ 'links' ] },
+    { name: 'insert', groups: [ 'insert' ] },
+    { name: 'colors', groups: [ 'colors' ] },
+    '/',
+    { name: 'styles', groups: [ 'styles' ] },
+    { name: 'about', groups: [ 'about' ] },
+    { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+    { name: 'tools', groups: [ 'tools' ] },
+    { name: 'others', groups: [ 'others' ] }
+  ];
+  CKEDITOR.config.removeButtons = 'Maximize,Image,Flash,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,HiddenField,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,Templates,Preview,Print,Save,NewPage,CreateDiv,Language,About';
+});
 </script>
