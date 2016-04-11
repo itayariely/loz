@@ -33,3 +33,11 @@
 <br>
 
 <%= link_to 'New Friend', new_friend_path %>
+<form>
+  <textarea id="edit" name="content"></textarea>
+</form>
+<script>
+    $(function() {
+        $('#edit').froalaEditor()
+    });
+</script>
