@@ -55,5 +55,3 @@ gem 'jquery-datatables-rails', '~> 3.3.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'bootstrap-datepicker-rails'
-gem "watu_table_builder", :require => "table_builder"
-gem "simple_calendar", "~> 2.0"
