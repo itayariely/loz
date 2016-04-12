@@ -12,15 +12,46 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label "שם" %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :father_circul_id %><br>
-    <%= f.number_field :father_circul_id %>
+    <%= f.label "משוייך למגעל" %><br>
+    <% if @circul.father_circul_id == 0 %>
+      מעגל לא משוייך
+    <% else %>
+      <%= f.collection_select(:father_circul_id, Circul.all, :id, :name, :include_blank => true)  %>
+    <% end %>
   </div>
-  <%= collection_check_boxes(:circul, :friend_ids, Friend.all, :id, :name_with_initial)%>
+
+  <div>
+    <strong>חברים</strong><br />
+      <% i = 1 %>
+        <span>
+          <div class="row">
+            <table class="table">
+            <tr>
+
+            <%= f.collection_check_boxes(:friend_ids, Friend.order(:name), :id, :name_with_initial) do |b| %>
+              <% if i == 8 %>
+                <%= "</tr><tr>".html_safe %>
+                <% i = 1 %>
+              <% end %>
+              <%= b.label(class: "check_box") do %>
+                <td>
+                  <%= b.check_box(class: "check_box") %>
+
+                  <%= b.object.name %>
+                </td>
+              <% end %>
+              <% i = i+1 %>
+            <% end %>
+          </tr>
+          </table>
+          </div>
+        </span>
+  </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "שלח" %>
   </div>
 <% end %>

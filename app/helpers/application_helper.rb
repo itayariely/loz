@@ -38,4 +38,17 @@ module ApplicationHelper
     html
   end
 
+def progress_color(present)
+  case present
+  when 1..25
+    "success"
+  when 26..50
+    "info"
+  when 51..75
+    "warning"
+  when 75..100
+    "danger"
+  end
+end
+
 end

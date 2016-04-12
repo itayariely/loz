@@ -2,29 +2,61 @@
 
 <h1>רשימת חברים</h1>
 
-<table>
+<table id="friends" class="table datatable">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Lname</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Birth date</th>
-      <th colspan="3"></th>
+      <th>שם</th>
+      <th>שם משפחה</th>
+      <th>טלפון</th>
+      <th>דוא"ל"</th>
+      <th>תאריך לידה</th>
+      <th>חבר/ה המספר מעגלים</th>
+      <th>צריך/ה לבוא לסמינרים</th>
+      <th>בסך הכל ימים</th>
+      <th>בסך הכך לילות</th>
+      <th></th>
+      <th></th>
+
     </tr>
   </thead>
 
   <tbody>
     <% @friends.each do |friend| %>
       <tr>
-        <td><%= friend.name %></td>
+        <td><%= link_to friend.name, friend %></td>
         <td><%= friend.lname %></td>
         <td><%= friend.phone %></td>
         <td><%= friend.email %></td>
         <td><%= friend.birth_date %></td>
-        <td><%= link_to 'Show', friend %></td>
-        <td><%= link_to 'Edit', edit_friend_path(friend) %></td>
-        <td><%= link_to 'Destroy', friend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <% a = friend.all_parent_getter if friend.circuls.any? %>
+          <%= a.count if friend.circuls.any? %>
+        </td>
+        <td>
+          <% if friend.circuls.any? %>
+            <%  events = event_counter(a).count %>
+            <% present = (events * 100 / 52) %>
+            <div class="progress">
+              <div class="progress-bar progress-bar-<%= progress_color(present) %>" style="width: <%= present %>%">
+                <%= events %>
+              </div>
+            </div>
+          <% end %>
+        </td>
+        <td>
+          <% if friend.circuls.any? %>
+            <%= days_counter(a).inject(0, :+) %>
+          <% end %>
+        </td>
+        <td>
+          <% if friend.circuls.any? %>
+            <%= nights_counter(a).inject(0, :+) %>
+          <% end %>
+        </td>
+
+
+        <td><%= link_to 'עריכה', edit_friend_path(friend) %></td>
+        <td><%= link_to 'מחיקה', friend, method: :delete, data: { confirm: 'למחוק?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,10 +66,9 @@
 
 <%= link_to 'New Friend', new_friend_path %>
 
-<<%= form_for @friends.first do |f| %>
-
-  <%= f.text_area :name, :class => 'ckeditor' %>
-  <%= f.submit %>
+<% form_for @friends.first do |f| %>
+  <% f.text_area :name, :class => 'ckeditor' %>
+  <% f.submit %>
 <% end %>
 
 <script>

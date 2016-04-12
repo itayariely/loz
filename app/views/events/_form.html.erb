@@ -12,42 +12,42 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label "שם:" %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
+    <%= f.label "תאריך התחלה:" %><br>
+    <%= f.text_field :start_date, 'data-provide'=>'datepicker' %>
   </div>
   <div class="field">
-    <%= f.label :end_date %><br>
-    <%= f.date_select :end_date %>
+    <%= f.label "תאריך סיום:" %><br>
+    <%= f.text_field :end_date, 'data-provide'=>'datepicker' %>
   </div>
   <div class="field">
-    <%= f.label :note %><br>
+    <%= f.label "הערות:" %><br>
     <%= f.text_area :note %>
   </div>
   <div class="field">
-    <%= f.label :days %><br>
+    <%= f.label "כמה ימים יהיה:" %><br>
     <%= f.number_field :days %>
   </div>
   <div class="field">
-    <%= f.label :nights %><br>
+    <%= f.label "כמה לילות יהיה:" %><br>
     <%= f.number_field :nights %>
   </div>
   <div class="field">
-    <%= f.label :place %><br>
+    <%= f.label "מיקום" %><br>
     <%= f.text_field :place %>
   </div>
   <div class="field">
-    <%= f.label :status %><br>
+    <%= f.label "מצב" %><br>
     <%= f.number_field :status %>
   </div>
   <div class="field">
-    <%= f.label :color %><br>
+    <%= f.label "צבע" %><br>
     <%= f.text_field :color %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "שמירה" %>
   </div>
 <% end %>

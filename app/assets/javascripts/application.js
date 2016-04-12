@@ -12,8 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require turbolinks
 //= require ckeditor-jquery
+//= require bootstrap-sprockets
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require bootstrap-datepicker
 //= require_tree .
 //
 
@@ -34,6 +39,7 @@ $( document ).ready(function() {
 
 
 });
+
 
 // $( document ).ready(function() {
 // $('.links_shower').click(function(){

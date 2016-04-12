@@ -5,6 +5,7 @@ class FriendsController < ApplicationController
   # GET /friends.json
   def index
     @friends = Friend.all
+    @circuls = Circul.all
   end
 
   # GET /friends/1
@@ -60,6 +61,7 @@ class FriendsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
