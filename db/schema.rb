@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412115814) do
+ActiveRecord::Schema.define(version: 20160414130455) do
 
   create_table "circuls", force: :cascade do |t|
     t.string   "name"
@@ -22,16 +22,18 @@ ActiveRecord::Schema.define(version: 20160412115814) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.date     "start_at"
+    t.date     "end_at"
     t.text     "note"
     t.integer  "days"
     t.integer  "nights"
     t.string   "place"
-    t.integer  "status",     default: 0
+    t.integer  "status",      default: 0
     t.string   "color"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.boolean  "all_day"
+    t.text     "description"
   end
 
   create_table "events_circuls", force: :cascade do |t|

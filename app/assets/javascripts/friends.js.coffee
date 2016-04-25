@@ -12,4 +12,9 @@ jQuery ->
    $('#friends').dataTable
      aaSorting: [[ 7, "DESC" ]]
      paging: false
+     dom: '<"top"f>'
+     oLanguage:
+      sSearch: "חיפוש:"
+
+
     #  "paging": false

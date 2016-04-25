@@ -5,16 +5,31 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    if params['start'] && params['end']
+      @events = @events.between(params['start'], params['end'])
+    end
+     respond_to do |format|
+       format.html # index.html.erb
+       format.json { render :json => @events }
+     end
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @event }
+    end
   end
 
   # GET /events/new
   def new
     @event = Event.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render :json => @event }
+    end
   end
 
   # GET /events/1/edit
@@ -69,6 +84,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :start_date, :end_date, :note, :days, :nights, :place, :status, :color)
+      params.require(:event).permit(:name, :start_at, :end_at, :note, :days, :nights, :place, :status, :color, :all_day, :description)
     end
 end

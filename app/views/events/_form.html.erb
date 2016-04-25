@@ -17,11 +17,12 @@
   </div>
   <div class="field">
     <%= f.label "תאריך התחלה:" %><br>
-    <%= f.text_field :start_date, 'data-provide'=>'datepicker' %>
+    <%= f.text_field :start_at, 'data-provide'=>'datepicker', :class => "datepicker_format" %>
   </div>
   <div class="field">
     <%= f.label "תאריך סיום:" %><br>
-    <%= f.text_field :end_date, 'data-provide'=>'datepicker' %>
+    <%= f.text_field :end_at, 'data-provide'=>'datepicker', :class => "datepicker_format" %>
+    <%# f.text_field :end_at %>
   </div>
   <div class="field">
     <%= f.label "הערות:" %><br>
@@ -51,3 +52,9 @@
     <%= f.submit "שמירה" %>
   </div>
 <% end %>
+<script>
+  $('.datepicker_format').datepicker({
+    format: 'dd-mm-yyyy'
+  });
+  
+</script>

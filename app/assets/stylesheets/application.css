@@ -7,13 +7,22 @@
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_self
  *= require bootstrap-datepicker3
+ *= require fullcalendar
  *= require_tree .
 */
+
 
 body{
   padding: 50px;
 }
-
+input{
+  direction: ltr !important;
+}
+#friends_filter{
+  width: 50%;
+  float: left;
+  text-align: left;
+}
 
 .links{
 

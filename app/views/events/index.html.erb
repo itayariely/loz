@@ -7,10 +7,10 @@
     <tr>
       <th>שם</th>
       <th>תאריך התחלה</th>
-      <th>תאריך סיום</th>
       <th>הערות</th>
       <th>ימים</th>
       <th>לילות</th>
+      <th>תאריך סיום</th>
       <th>מיקום</th>
       <th>מצב</th>
       <th>צבע</th>
@@ -22,8 +22,8 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.name %></td>
-        <td><%= event.start_date %></td>
-        <td><%= event.end_date %></td>
+        <td><%= event.start_at %></td>
+        <td><%= event.end_at %></td>
         <td><%= event.note %></td>
         <td><%= event.days %></td>
         <td><%= event.nights %></td>
@@ -41,3 +41,4 @@
 <br>
 
 <%= link_to 'אירוע חדש', new_event_path %>
+<div id='calendar'></div>
