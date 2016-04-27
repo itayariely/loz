@@ -49,7 +49,8 @@
   <table class="table">
     <tr>
         <% i = 1 %>
-        <%= f.collection_check_boxes(:circul_ids, Circul.order(:name), :id, :name) do |ff| %>
+        <%= f.collection_check_boxes :circul_ids, Circul.all, :id, :initial_name do |ff| %>
+                <%# f.collection_check_boxes(:circul_ids, Circul.all, :id, :initial_name) do |ff| %>
           <% if i == 8 %>
             <%= "</tr><tr>".html_safe %>
             <% i = 1 %>
