@@ -1,52 +1,72 @@
-<%= form_for(@event) do |f| %>
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
-      <ul>
-      <% @event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= simple_form_for(@event) do |f| %>
 
   <div class="field">
-    <%= f.label "שם:" %><br>
-    <%= f.text_field :name %>
+    <%= f.input :name, label: "שם:" %>
   </div>
   <div class="field">
-    <%= f.label "תאריך התחלה:" %><br>
-    <%= f.text_field :start_at, 'data-provide'=>'datepicker', :class => "datepicker_format" %>
+    <%= f.input :days, label: "כמה ימים יהיה:" %>
   </div>
   <div class="field">
-    <%= f.label "תאריך סיום:" %><br>
-    <%= f.text_field :end_at, 'data-provide'=>'datepicker', :class => "datepicker_format" %>
+    <%= f.input :nights, label: "כמה לילות יהיה:" %>
+  </div>
+  <div class="field">
+    <%= f.input :start_at, label: "הכי מוקדם יתחיל ב:" %><br>
+    <%# f.text_field :start_at, 'data-provide'=>'datepicker', :class => "datepicker_format" %>
+  </div>
+  <div class="field">
+    <%= f.input :end_at, label: "לכל המאוחר יסתיים ב:" %><br>
+    <%# f.text_field :end_at, 'data-provide'=>'datepicker', :class => "datepicker_format" %>
     <%# f.text_field :end_at %>
   </div>
+  <div class="field">
+    <%= f.select :time, Event.times.keys.to_a  %>
+  </div>
+  <div class="field">
+    <%= f.select :mosa, Event.mosas.keys.to_a  %>
+  </div>
+
   <div class="field">
     <%= f.label "הערות:" %><br>
     <%= f.text_area :note %>
   </div>
-  <div class="field">
-    <%= f.label "כמה ימים יהיה:" %><br>
-    <%= f.number_field :days %>
-  </div>
-  <div class="field">
-    <%= f.label "כמה לילות יהיה:" %><br>
-    <%= f.number_field :nights %>
-  </div>
-  <div class="field">
+  <div class="field hidden">
     <%= f.label "מיקום" %><br>
     <%= f.text_field :place %>
   </div>
-  <div class="field">
+  <div class="field hidden">
     <%= f.label "מצב" %><br>
     <%= f.number_field :status %>
   </div>
-  <div class="field">
+  <div class="field hidden">
     <%= f.label "צבע" %><br>
     <%= f.text_field :color %>
+  </div>
+  <div class="field">
+
+    <%= f.label "מיועד למעגלים:" %><br>
+
+<div class="row">
+  <table class="table">
+    <tr>
+        <% i = 1 %>
+        <%= f.collection_check_boxes(:circul_ids, Circul.order(:name), :id, :name) do |ff| %>
+          <% if i == 8 %>
+            <%= "</tr><tr>".html_safe %>
+            <% i = 1 %>
+          <% end %>
+          <%= ff.label(class: "check_box") do %>
+            <td>
+              <%= ff.check_box(class: "check_box") %>
+              <%= ff.object.name %>
+            </td>
+          <% end %>
+          <% i = i+1 %>
+        <% end %>
+
+    </tr>
+  </table>
+</div>
+
   </div>
   <div class="actions">
     <%= f.submit "שמירה" %>
@@ -56,5 +76,4 @@
   $('.datepicker_format').datepicker({
     format: 'dd-mm-yyyy'
   });
-  
 </script>

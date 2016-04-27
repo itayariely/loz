@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414130455) do
+ActiveRecord::Schema.define(version: 20160427130016) do
 
   create_table "circuls", force: :cascade do |t|
     t.string   "name"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20160414130455) do
     t.datetime "updated_at",              null: false
     t.boolean  "all_day"
     t.text     "description"
+    t.integer  "time"
+    t.integer  "mosa"
   end
 
   create_table "events_circuls", force: :cascade do |t|

@@ -21,4 +21,6 @@
 
 en:
   hello: "Hello world"
-  
+  errors:
+    messages:
+      blank: "שדה חייב להיות מלא"

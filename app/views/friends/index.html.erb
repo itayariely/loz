@@ -1,5 +1,35 @@
 <p id="notice"><%= notice %></p>
+<div class="row" dir="rtl">
+  <h1>תצוגה לפי חודשים</h1>
+<table class="Table">
+  <tr class="toptop">
 
+
+      <% i = 14 %>
+      <% div_starts = nil %>
+      <% br = 0 %>
+      <% @events.order(:start_at).each do |event| %>
+
+          <% if i != event.start_at.month %>
+          <%= "</ol></td>".html_safe if div_starts != nil %>
+          <%= "</tr><tr>".html_safe if br == 6 %>
+          <%= "<td class='toptop'>".html_safe %>
+            <%= "<h3>#{event.monther}</h3><ol>".html_safe  %>
+            <% i = event.start_at.month %>
+            <% div_starts = "a" %>
+            <% br = br+1 %>
+          <% end %>
+          <li>
+            <%= event.name %>
+          </li>
+
+      <% end %>
+</td>
+  </tr>
+
+</table>
+
+</div>
 <h1>רשימת חברים</h1>
 
 <table id="friends" class="table datatable">

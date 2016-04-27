@@ -1,26 +1,17 @@
-<%= form_for(@circul) do |f| %>
-  <% if @circul.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@circul.errors.count, "error") %> prohibited this circul from being saved:</h2>
-
-      <ul>
-      <% @circul.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= simple_form_for(@circul) do |f| %>
   <div class="field">
-    <%= f.label "שם" %><br>
-    <%= f.text_field :name %>
+    <%= f.input :name, label: "שם" %>
   </div>
   <div class="field">
     <%= f.label "משוייך למגעל" %><br>
-    <% if @circul.father_circul_id == 0 %>
-      מעגל לא משוייך
+    <% if @circul.name != nil %>
+      <% if @circul.father_circul_id == 0 %>
+        מעגל לא משוייך
+      <% else %>
+        <%= f.collection_select(:father_circul_id, Circul.all, :id, :name, :include_blank => true)  %>
+      <% end %>
     <% else %>
-      <%= f.collection_select(:father_circul_id, Circul.all, :id, :name, :include_blank => true)  %>
+        <%= f.collection_select(:father_circul_id, Circul.all, :id, :name, :include_blank => true)  %>
     <% end %>
   </div>
 

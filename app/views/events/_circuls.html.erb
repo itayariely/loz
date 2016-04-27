@@ -1,0 +1,19 @@
+
+<ul>
+<% self.children.each do |child| %>
+
+<li>
+    <div class="links_shower">
+      <%= link_to child.name, child %>
+      <span class="plus">+</span>
+      <span class="links">
+        <%= link_to 'עריכה', edit_circul_path(circul) %>
+        <%= link_to 'מחיקה', circul, method: :delete, data: { confirm: 'למחוק?' } %>
+      </span>
+    </div>
+    <%= render child if child.children.present? %>
+</li>
+
+
+<% end %>
+</ul>

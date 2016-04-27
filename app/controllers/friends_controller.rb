@@ -6,6 +6,7 @@ class FriendsController < ApplicationController
   def index
     @friends = Friend.all
     @circuls = Circul.all
+    @events  = Event.all
   end
 
   # GET /friends/1

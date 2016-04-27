@@ -31,16 +31,26 @@
 </p>
 
 <p>
+  <strong>מתי צריך להיות:</strong>
+  <%= @event.time %>
+</p>
+
+<p>
+  <strong>למי יועד:</strong>
+  <%= @event.mosa %>
+</p>
+
+<p class="hidden">
   <strong>מיקום:</strong>
   <%= @event.place %>
 </p>
 
-<p>
+<p class="hidden">
   <strong>מצב:</strong>
   <%= @event.status %>
 </p>
 
-<p>
+<p class="hidden">
   <strong>צבע:</strong>
   <%= @event.color %>
 </p>

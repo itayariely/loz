@@ -1,9 +1,20 @@
 class Event < ActiveRecord::Base
+
+  enum time: [ :ימות_השבוע, :סופש]
+  enum mosa: [ :הכשרה, :לחניכים]
+
   has_many :events_circuls
   has_many :circuls, :through => :events_circuls
   accepts_nested_attributes_for :events_circuls, :allow_destroy => true
 
-# def title
+def monther
+  month = start_at.month
+  he_month = ["", "ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"]
+  he_month[month]
+end
+
+validates :name, :days, :nights, :start_at, :end_at,  presence: true
+ # def title
 #   name
 # end
 #

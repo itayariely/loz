@@ -11,6 +11,7 @@ class Circul < ActiveRecord::Base
   has_many :events, :through => :events_circuls
   accepts_nested_attributes_for :events_circuls, :allow_destroy => true
 
+  validates :name, presence: true
 
   def has_father?
     self.father.present?

@@ -1,35 +1,20 @@
-<%= form_for(@friend) do |f| %>
-  <% if @friend.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@friend.errors.count, "error") %> prohibited this friend from being saved:</h2>
-
-      <ul>
-      <% @friend.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= simple_form_for(@friend) do |f| %>
 
   <div class="field">
-    <%= f.label "שם" %><br>
-    <%= f.text_field :name %>
+    <%= f.input :name, label: "שם" %>
+
   </div>
   <div class="field">
-    <%= f.label "שם משפחה" %><br>
-    <%= f.text_field :lname %>
+    <%= f.input :lname, label: "שם משפחה" %>
   </div>
   <div class="field">
-    <%= f.label "טלפון" %><br>
-    <%= f.text_field :phone %>
+    <%= f.input :phone, label: "טלפון" %>
   </div>
   <div class="field">
-    <%= f.label 'דוא"ל' %><br>
-    <%= f.text_field :email %>
+    <%= f.input :email, label: 'דוא"ל' %>
   </div>
   <div class="field">
-    <%= f.label "תאריך לידה" %><br>
-    <%= f.date_select :birth_date %>
+    <%= f.input :birth_date, label: "תאריך לידה" %>
   </div>
   <div>
 

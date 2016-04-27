@@ -10,8 +10,13 @@
  *= require fullcalendar
  *= require_tree .
 */
-
-
+.toptop{
+  vertical-align: top;
+  padding: 5px;
+}
+.hidden{
+  display: none;
+}
 body{
   padding: 50px;
 }
