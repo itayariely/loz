@@ -12,7 +12,11 @@
 */
 .toptop{
   vertical-align: top;
-  padding: 5px;
+  /*padding: 5px;*/
+  padding: 7px;
+}
+.trtoptop{
+  vertical-align: top;
 }
 .hidden{
   display: none;
