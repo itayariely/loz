@@ -1,3 +1,4 @@
+
 <p id="notice"><%= notice %></p>
 <div class="row" dir="rtl">
   <h1>תצוגה לפי חודשים</h1>
@@ -20,7 +21,7 @@
             <% br = br+1 %>
           <% end %>
           <li>
-            <%= event.name %>
+            <%= link_to event.name, event_path(event) %>
           </li>
 
       <% end %>
