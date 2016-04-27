@@ -21,7 +21,7 @@ module FriendsHelper
     events = Event.where(id: event_counter(all_parrent))
     a = []
     events.each do |event|
-      a << event.nights if event.days.present?
+      a << event.nights if event.nights.present?
     end
     a
   end
