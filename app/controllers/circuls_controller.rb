@@ -4,8 +4,8 @@ class CirculsController < ApplicationController
   # GET /circuls
   # GET /circuls.json
   def index
-    # @circuls = Circul.where(father_circul_id: 0)
-    @circuls = Circul.where("father_circul_id IN ('0','') OR father_circul_id IS NULL")
+    @circuls = Circul.where(father_circul_id: [0, nil])
+    # @circuls = Circul.where("father_circul_id IN ('0','') OR father_circul_id IS NULL")
   end
 
   # GET /circuls/1
