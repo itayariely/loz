@@ -29,4 +29,8 @@ class Friend < ActiveRecord::Base
   end
 
 
+    #default ordering
+    default_scope {
+      order("name ASC")
+    }
 end

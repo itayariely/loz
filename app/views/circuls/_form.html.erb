@@ -4,8 +4,8 @@
   </div>
   <div class="field">
     <%= f.label "משוייך למגעל" %><br>
-    
-    <%= f.collection_select(:father_circul_id, Circul.all, :id, :name, :include_blank => true)  %>
+
+    <%= f.collection_select(:father_circul_id, Circul.all, :id, :name, :include_blank => "מעגל לא משוייך")  %>
     <%# if @circul.name != nil %>
       <%# if @circul.father_circul_id == 0 %>
         <!-- מעגל לא משוייך -->

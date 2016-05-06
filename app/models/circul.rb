@@ -19,4 +19,9 @@ class Circul < ActiveRecord::Base
   def initial_name
     "#{name} <br />".html_safe
   end
+
+  #default ordering
+  default_scope {
+    order("name ASC")
+  }
 end
