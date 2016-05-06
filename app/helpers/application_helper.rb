@@ -40,15 +40,18 @@ module ApplicationHelper
 
 def progress_color(present)
   case present
-  when 1..25
+  when 0..25
     "success"
   when 26..50
     "info"
   when 51..75
     "warning"
-  when 75..100
+  when 76..85
     "danger"
+  when 86..200
+    "danger progress-bar-striped active"
   end
+
 end
 
 end

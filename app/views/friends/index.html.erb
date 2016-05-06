@@ -77,12 +77,26 @@
         </td>
         <td>
           <% if friend.circuls.any? %>
-            <%= days_counter(a).inject(0, :+) %>
+          <%  days = days_counter(a).inject(0, :+) %>
+          <% present = (days * 100 / 104) %>
+          <div class="progress">
+            <div class="progress-bar progress-bar-<%= progress_color(present) %>" style="width: <%= present %>%">
+              <%= days %>
+            </div>
+          </div>
+            <%# days_counter(a).inject(0, :+) %>
           <% end %>
         </td>
         <td>
           <% if friend.circuls.any? %>
-            <%= nights_counter(a).inject(0, :+) %>
+          <%  nights = nights_counter(a).inject(0, :+) %>
+          <% present = (nights * 100 / 52) %>
+          <div class="progress">
+            <div class="progress-bar progress-bar-<%= progress_color(present) %>" style="width: <%= present %>%">
+              <%= nights %>
+            </div>
+          </div>
+            <%# nights_counter(a).inject(0, :+) %>
           <% end %>
         </td>
 
