@@ -12,12 +12,13 @@
       <% @events.order(:start_at).each do |event| %>
 
           <% if i != event.start_at.month %>
-          <%= "</ol></td>".html_safe if div_starts != nil %>
-          <%= "</tr><tr>".html_safe if br == 6 %>
-          <%= "<td class='toptop'>".html_safe %>
-            <%= "<h3>#{event.monther}</h3><ol>".html_safe  %>
-            <% i = event.start_at.month %>
-            <% div_starts = "a" %>
+            <%= "</ol></td>".html_safe if div_starts != nil %>
+            <%= "</tr><tr>".html_safe if br == 6 %>
+              <% br = 0 if br == 6 %>
+              <%= "<td class='toptop'>".html_safe %>
+                <%= "<h3>#{event.monther}</h3><ol>".html_safe  %>
+                <% i = event.start_at.month %>
+              <% div_starts = "a" %>
             <% br = br+1 %>
           <% end %>
           <li>
@@ -101,30 +102,3 @@
   <% f.text_area :name, :class => 'ckeditor' %>
   <% f.submit %>
 <% end %>
-
-<script>
-$('.ckeditor').ckeditor({
-// optional config
-});
-$(document).ready(function() {
-  // http://ckeditor.com/latest/samples/toolbarconfigurator/index.html#basic to config
-  CKEDITOR.config.toolbarGroups = [
-    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
-    '/',
-    { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
-    { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
-    { name: 'forms', groups: [ 'forms' ] },
-    { name: 'links', groups: [ 'links' ] },
-    { name: 'insert', groups: [ 'insert' ] },
-    { name: 'colors', groups: [ 'colors' ] },
-    '/',
-    { name: 'styles', groups: [ 'styles' ] },
-    { name: 'about', groups: [ 'about' ] },
-    { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
-    { name: 'tools', groups: [ 'tools' ] },
-    { name: 'others', groups: [ 'others' ] }
-  ];
-  CKEDITOR.config.removeButtons = 'Maximize,Image,Flash,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,HiddenField,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,Templates,Preview,Print,Save,NewPage,CreateDiv,Language,About';
-});
-</script>

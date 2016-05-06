@@ -1,7 +1,7 @@
 class Circul < ActiveRecord::Base
 
    belongs_to :father, class_name: "Circul", foreign_key: "father_circul_id"
-   has_many :children, class_name: "Circul", foreign_key: "father_circul_id"
+   has_many :children, class_name: "Circul", foreign_key: "father_circul_id", dependent: :destroy
 
   has_many :friends_circuls
   has_many :friends, :through => :friends_circuls
