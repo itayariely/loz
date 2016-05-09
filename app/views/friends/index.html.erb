@@ -6,19 +6,27 @@
 
 
   <%= form_tag friends_path, :method => 'get' do %>
-<p>
+<table class="table">
+<tr>
+
+  <% i = 0 %>
   <% @circuls.each do |circul| %>
-    <%= check_box_tag 'search[]', circul.id %>
-    <%= h circul.name %>
+
+      <% if i == 6 %>
+        <%= "</tr><tr>".html_safe  %>
+        <% i = 0 %>
+      <% end %>
+        <td>
+          <%= check_box_tag 'search[]', circul.id %>
+          <%= h circul.name %>
+        </td>
+      <% i = i+1 %>
+
   <% end %>
-  <%# check_box_tag 'search[]', 16 %>
-  <!-- ת -->
-  <%# check_box_tag 'search[]', 22 %>
-  <!-- אמיתי -->
-  <%# check_box_tag 'search[]', 20 %>
-  <!-- מעגלי החיים -->
   <%= submit_tag "Search", name: nil %>
-</p>
+
+</tr>
+</table>
 <% end %>
 
 
