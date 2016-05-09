@@ -1,6 +1,28 @@
 
 <p id="notice"><%= notice %></p>
 <div class="row" dir="rtl">
+
+
+
+
+  <%= form_tag friends_path, :method => 'get' do %>
+<p>
+  <% @circuls.each do |circul| %>
+    <%= check_box_tag 'search[]', circul.id %>
+    <%= h circul.name %>
+  <% end %>
+  <%# check_box_tag 'search[]', 16 %>
+  <!-- ת -->
+  <%# check_box_tag 'search[]', 22 %>
+  <!-- אמיתי -->
+  <%# check_box_tag 'search[]', 20 %>
+  <!-- מעגלי החיים -->
+  <%= submit_tag "Search", name: nil %>
+</p>
+<% end %>
+
+
+
   <h1>תצוגה לפי חודשים</h1>
 <table class="Table">
   <tr class="trtoptop">
@@ -21,8 +43,20 @@
               <% div_starts = "a" %>
             <% br = br+1 %>
           <% end %>
-          <li>
+
+          <% if params[:search] %>
+            <% a = get_event_circuls(event.circuls) %>
+            <% b = params[:search] %>
+            <% b = eval b.to_s.gsub('"', '') %>
+            <% c = (a & b).empty? %>
+          <% end %>
+          <li class=<%= "hidden" if c  %>>
             <%= link_to event.name, event_path(event) %>
+            <% if event.circuls.any? %>
+              <%# get_event_circuls(event.circuls).each do |circul| %>
+                  <%# circul %>
+              <%# end %>
+            <% end %>
           </li>
 
       <% end %>

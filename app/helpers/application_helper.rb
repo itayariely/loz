@@ -54,4 +54,26 @@ def progress_color(present)
 
 end
 
+
+def get_event_circuls(circuls)
+   ar = circuls.collect{|f| f.id}.flatten.uniq
+  circuls.each do |circul|
+    ar += return_event_circuls_parents(circul) if circul.father.present?
+    # ar += [circul.father.name] if circul.father.present?
+    # ar += [circul.father.father.name] if circul.father.father.present?
+  end
+  ar.flatten.uniq
+end
+
+def return_event_circuls_parents(circul)
+  r = []
+  r << [circul.father.id]
+  if circul.father.father.present?
+    r << return_event_circuls_parents(circul.father)
+  end
+  r.flatten.uniq
+
+end
+
+
 end
