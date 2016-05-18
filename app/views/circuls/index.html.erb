@@ -8,18 +8,18 @@
         <li>
           <div class="links_shower">
             <%# if circul.color.present?  %>
-              <!-- <span style="display: inline-block; width:10px; height:10px; background-color: <%= circul.color %>"> </span> -->
+              <!-- <span style="display: inline-block; width:10px; height:10px; background-color: <%#= circul.color %>"> </span> -->
             <%# end %>
             <%= link_to circul.name, circul  %>
             <span class="plus">+</span>
             <span class="links">
-              <%#= link_to 'עריכה', edit_circul_path(circul) %>
-              <%#= link_to 'מחיקה', circul, method: :delete, data: { confirm: 'למחוק?' } %>
+              <%= link_to 'עריכה', edit_circul_path(circul) %>
+              <%= link_to 'מחיקה', circul, method: :delete, data: { confirm: 'למחוק?' } %>
             </span>
         </div>
-        <%# if circul.children.any? %>
-          <%#= render circul %>
-        <%# end %>
+        <% if circul.children.any? %>
+          <%= render circul %>
+        <% end %>
       </li>
     <% end %>
   </ul>
