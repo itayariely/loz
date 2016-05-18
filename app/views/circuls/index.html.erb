@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>רשימת המעגלים</h1>
-<!--
+
 <table>
   <thead>
     <tr>
@@ -9,33 +9,28 @@
       <th>Father circul</th>
       <th colspan="3"></th>
     </tr>
-  </thead> -->
+  </thead>
 
-  <!-- <tbody> -->
-  <ul class="tree">
+  <tbody>
     <% @circuls.each do |circul| %>
-        <br/>
-        <li>
-          <div class="links_shower">
-            <%# if circul.color.present?  %>
-              <!-- <span style="display: inline-block; width:10px; height:10px; background-color: <%= circul.color %>"> </span> -->
-            <%# end %>
-            <%= link_to circul.name, circul  %>
-            <span class="plus">+</span>
-            <span class="links">
-              <%= link_to 'עריכה', edit_circul_path(circul) %>
-              <%= link_to 'מחיקה', circul, method: :delete, data: { confirm: 'למחוק?' } %>
-            </span>
-        </div>
-        <%# if circul.children.any? %>
-          <%#= render circul %>
-        <%# end %>
-      </li>
-    <% end %>
-  </ul>
+    <tr>
+      <td><%= circul.name %></td>
+      <td><%# circul.father.name if circul.father.present?  %><%= circul.father.present? ? circul.father.name : "מעגל לא משוייך" %></td>
+    </tr>
   </tbody>
+  <% end %>
 </table>
 
 <br>
 
 <%= link_to 'הוספת מעגל', new_circul_path %>
+
+<br />
+<div dir=ltr>
+<% @rel = EventsCircul.all %>
+newcirculs = [
+<% @rel.each do |rel| %>
+{event_id:<%= rel.event_id %>, circul_id:<%= rel.circul_id %>},
+<% end %>
+]
+</div>
