@@ -6,7 +6,7 @@ class CirculsController < ApplicationController
   def index
     @circuls = Circul.where(father_circul_id: [0, nil]).order(:name)
     # @circuls = Circul.where("father_circul_id IN ('0','') OR father_circul_id IS NULL")
-    @circuls = Circul.all
+    # @circuls = Circul.all
   end
 
   # GET /circuls/1
