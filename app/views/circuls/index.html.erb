@@ -24,3 +24,13 @@
 <br>
 
 <%= link_to 'הוספת מעגל', new_circul_path %>
+
+<br />
+<div dir=ltr>
+
+newcirculs = [
+<% @circuls.each do |circul| %>
+{name:"<%= circul.name %>(x)", father_circul_id:"<%= circul.father_circul_id %>"},
+<% end %>
+]
+</div>
