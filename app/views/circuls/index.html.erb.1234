@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>רשימת המעגלים</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Father circul</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @circuls.each do |circul| %>
+    <tr>
+      <td><%= circul.name %></td>
+      <td><%# circul.father.name if circul.father.present?  %><%= circul.father.present? ? circul.father.name : "מעגל לא משוייך" %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+
+<br>
+
+<%= link_to 'הוספת מעגל', new_circul_path %>
+
+<br />
+<div dir=ltr>
+<% @rel = EventsCircul.all %>
+newcirculs = [
+<% @rel.each do |rel| %>
+{event_id:<%= rel.event_id %>, circul_id:<%= rel.circul_id %>},
+<% end %>
+]
+</div>

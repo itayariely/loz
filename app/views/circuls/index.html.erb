@@ -4,7 +4,6 @@
 
   <ul class="tree">
     <% @circuls.each do |circul| %>
-        <br/>
         <li>
           <div class="links_shower">
             <%= link_to circul.name, circul  %>
@@ -15,6 +14,7 @@
             </span>
         </div>
         <% if circul.children.any? %>
+        <% @par = "circuls" %>
           <%= render circul %>
         <% end %>
       </li>

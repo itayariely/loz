@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require bootstrap-sprockets
 //= require turbolinks
 //= require ckeditor-jquery
 //= require bootstrap-sprockets
@@ -55,89 +56,4 @@ $( document ).ready(function() {
 
   });
 
-
-	// $('#calendar').fullCalendar({
-	// 	// put your options and callbacks here
-	// 	header: {
-	// 		left: 'prev,next today',
-	// 		center: 'title',
-	// 		right: 'month,agendaWeek,agendaDay'
-	// 	},
-	// 	defaultDate: '2016-04-12',
-	// 	editable: true,
-	// 	eventLimit: true, // allow "more" link when too many events
-	// 	events: [
-	// 		{
-	// 			title: 'All Day Event',
-	// 			start: '2016-04-01'
-	// 		},
-	// 		{
-	// 			title: 'Long Event',
-	// 			start: '2016-04-07',
-	// 			end: '2016-04-10'
-	// 		},
-	// 		{
-	// 			id: 999,
-	// 			title: 'Repeating Event',
-	// 			start: '2016-04-09T16:00:00'
-	// 		},
-	// 		{
-	// 			id: 999,
-	// 			title: 'Repeating Event',
-	// 			start: '2016-04-16T16:00:00'
-	// 		},
-	// 		{
-	// 			title: 'Conference',
-	// 			start: '2016-04-11',
-	// 			end: '2016-04-13'
-	// 		},
-	// 		{
-	// 			title: 'Meeting',
-	// 			start: '2016-04-12T10:30:00',
-	// 			end: '2016-04-12T12:30:00'
-	// 		},
-	// 		{
-	// 			title: 'Lunch',
-	// 			start: '2016-04-12T12:00:00'
-	// 		},
-	// 		{
-	// 			title: 'Meeting',
-	// 			start: '2016-04-12T14:30:00'
-	// 		},
-	// 		{
-	// 			title: 'Happy Hour',
-	// 			start: '2016-04-12T17:30:00'
-	// 		},
-	// 		{
-	// 			title: 'Dinner',
-	// 			start: '2016-04-12T20:00:00'
-	// 		},
-	// 		{
-	// 			title: 'Birthday Party',
-	// 			start: '2016-04-13T07:00:00'
-	// 		},
-	// 		{
-	// 			title: 'Click for Google',
-	// 			url: 'http://google.com/',
-	// 			start: '2016-04-28'
-	// 		}
-	// 	]
-	// });
-});
-
-
-// $( document ).ready(function() {
-// $('.links_shower').click(function(){
-//   $( this.children ).toggle(
-//   function() {
-//     $( this.children ).children('.links').css("display", "block");
-//     $( this ).html("aaaaaaaaaaaaaaaaaaaaaaa");
-//   }, function() {
-//     $( this.children ).children('.links').css("display", "none");
-//   }
-// );
-// });
-//   });
-
-$(document).on('ready page:load', function () {
 });

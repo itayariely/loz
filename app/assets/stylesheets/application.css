@@ -10,6 +10,7 @@
  *= require fullcalendar
  *= require_tree .
 */
+
 .toptop{
   vertical-align: top;
   /*padding: 5px;*/
@@ -22,7 +23,12 @@
   display: none;
 }
 body{
-  padding: 50px;
+  /*padding: 50px;*/
+  direction: rtl;
+}
+.table{
+  direction: rtl !important;
+
 }
 input{
   direction: ltr !important;

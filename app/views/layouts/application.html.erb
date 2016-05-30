@@ -8,8 +8,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body dir="rtl">
+  <%= render 'layouts/navbar' %>
+  
+  <div id="main-container" class="container">
+    <div class="row">
 
-<%= yield %>
+      <div id="content" class="col-xs-10">
+        <%#= flash_messages %>
+        <%= yield %>
+      </div>
+
+      <div id="sidebar" class="col-xs-2">
+        <%= render 'layouts/side_bar' %>
+      </div>
+
+    </div>
+  </div>
 
 </body>
 </html>

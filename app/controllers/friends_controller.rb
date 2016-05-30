@@ -5,7 +5,8 @@ class FriendsController < ApplicationController
   # GET /friends.json
   def index
     @friends = Friend.all
-    @circuls = Circul.all
+    # @circuls = Circul.all
+        @circuls = Circul.where(father_circul_id: [0, nil]).order(:name)
     @events  = Event.all
   end
 

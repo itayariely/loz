@@ -16,5 +16,6 @@ jQuery ->
      oLanguage:
       sSearch: "חיפוש:"
 
-
-    #  "paging": false
+   $('#month').dataTable
+     paging: false
+     scrollX: true

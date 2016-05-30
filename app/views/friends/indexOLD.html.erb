@@ -6,9 +6,17 @@
 
 
   <%= form_tag friends_path, :method => 'get' do %>
-  <ul class="tree">
+  <table class="table">
+    <tr>
+
+      <% i = 0 %>
       <% @circuls.each do |circul| %>
-        <li>
+
+      <% if i == 6 %>
+      <%= "</tr><tr>".html_safe  %>
+        <% i = 0 %>
+        <% end %>
+        <td>
           <% if params[:search] %>
             <% b = eval params[:search].to_s.gsub('"', '') %>
             <% if b.include? circul.id %>
@@ -21,91 +29,60 @@
           <% end %>
 
           <%= h circul.name %>
-          <% if circul.children.any? %>
-            <% @par = "friends" %>
-            <%= render circul %>
-          <% end %>
-        </li>
-
+        </td>
+        <% i = i+1 %>
 
         <% end %>
 
-      </ul>
+      </tr>
+    </table>
 <%= submit_tag "Search", name: nil %>
 <% end %>
 
+
+
   <h1>תצוגה לפי חודשים</h1>
-  <table id="month" class="table datatable">
-    <thead>
-      <tr>
-        <td>שנה</td>
-        <td>ינואר</td>
-        <td>פברואר</td>
-        <td>מרץ</td>
-        <td>אפריל</td>
-        <td>מאי</td>
-        <td>יוני</td>
-        <td>יולי</td>
-        <td>אוגוסט</td>
-        <td>ספטמבר</td>
-        <td>אוקטובר</td>
-        <td>נובמבר</td>
-        <td>דצמבר</td>
-    </tr>
-    </thead>
-  <tbody>
-    <tr>
-          <% yearshow =  @events.order(:start_at).first.start_at.year %>
-          <% firstline = true %>
-          <% monthcount = 1 %>
-
-          <% @events.order(:start_at).each do |event| %>
-
-            <% if yearshow == event.start_at.year %>
-
-            <% if firstline == false %>
-              <% while monthcount <= 12 %>
-            </ul></td><td><ul>
-                  <% monthcount = monthcount+1 %>
-              <% end %>
-              <% monthcount = 1 %>
-              </tr><tr>
-              <% end %>
-              <td><ul>
-
-                <%= event.start_at.year %>
-                <% firstline = false %>
-                <% yearshow = yearshow + 1 %>
-                <% monthcount == 1 %>
-              </td>
-              <td>
-
-              <% end %>
-
-              <% while monthcount != event.start_at.month  do %>
-                <% monthcount = monthcount+1 %>
-                </td><td>
-              <% end %>
-
-              <% if event.start_at.month == monthcount %>
-              <% if params[:search] %>
-                <% a = get_event_circuls(event.circuls) %>
-                <% b = params[:search] %>
-                <% b = eval b.to_s.gsub('"', '') %>
-                <% c = (a & b).empty? %>
-              <% end %>
-                <li class=<%= "hidden" if c %> >
-                  <%= event.name %>
-                </li>
-              <% end %>
+<table class="Table">
+  <tr class="trtoptop">
 
 
+      <% i = 14 %>
+      <% div_starts = nil %>
+      <% br = 0 %>
+      <% @events.order(:start_at).each do |event| %>
+
+          <% if i != event.start_at.month %>
+            <%= "</ol></td>".html_safe if div_starts != nil %>
+            <%= "</tr><tr>".html_safe if br == 6 %>
+              <% br = 0 if br == 6 %>
+              <%= "<td class='toptop'>".html_safe %>
+                <%= "<h3>#{event.monther}</h3><ol>".html_safe  %>
+                <% i = event.start_at.month %>
+              <% div_starts = "a" %>
+            <% br = br+1 %>
           <% end %>
-        </ul>
-        </td>
-    </tr>
-  </tbody>
+
+          <% if params[:search] %>
+            <% a = get_event_circuls(event.circuls) %>
+            <% b = params[:search] %>
+            <% b = eval b.to_s.gsub('"', '') %>
+            <% c = (a & b).empty? %>
+          <% end %>
+          <li class=<%= "hidden" if c  %>>
+            <%= link_to "#{event.name}(#{event.days}ימים)", event_path(event) %>
+            <%# if event.circuls.any? %>
+              <%# get_event_circuls(event.circuls).each do |circul| %>
+                  <%# circul %>
+                  <%# end %>
+              <%# end %>
+          </li>
+
+      <% end %>
+</td>
+  </tr>
+
 </table>
+
 </div>
 <h1>רשימת חברים</h1>
 

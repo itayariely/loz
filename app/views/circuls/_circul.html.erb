@@ -1,4 +1,4 @@
-
+<% if @par == "circuls" %>
 <ul>
 <% circul.children.each do |child| %>
 
@@ -17,3 +17,27 @@
 
 <% end %>
 </ul>
+<% elsif @par == "friends" %>
+<ul>
+<% circul.children.each do |child| %>
+
+<li>
+  <% if params[:search] %>
+    <% b = eval params[:search].to_s.gsub('"', '') %>
+    <% if b.include? child.id %>
+      <%= check_box_tag 'search[]', child.id, true %>
+    <% else %>
+      <%= check_box_tag 'search[]', child.id %>
+    <% end %>
+  <% else %>
+    <%= check_box_tag 'search[]', child.id %>
+  <% end %>
+
+  <%= h child.name %><%= child.id %>
+      <%= render child if child.children.present? %>
+</li>
+
+
+<% end %>
+</ul>
+<% end %>
