@@ -33,7 +33,7 @@
     <%= check_box_tag 'search[]', child.id %>
   <% end %>
 
-  <%= h child.name %><%= child.id %>
+  <%= h child.name %>
       <%= render child if child.children.present? %>
 </li>
 
