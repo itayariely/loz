@@ -45,8 +45,6 @@
 
 $( document ).ready(function() {
 	$('.links_shower').mouseover(function(){
-
-
     $(this).children('.links').css("visibility", "inherit");
     $(this).children('.plus').text("-");
   })
@@ -55,5 +53,7 @@ $( document ).ready(function() {
     $(this).children('.plus').text("+");
 
   });
+
+
 
 });

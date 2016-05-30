@@ -4,9 +4,10 @@
 
 
 
-
+<a class="btn btn-primary showsort" href="#" id="showsort">סינון סמינרים לפי מעגלים</a>
+<div style="display:none;" id="sortdiv">
   <%= form_tag friends_path, :method => 'get' do %>
-  <ul class="tree">
+    <ul class="tree">
       <% @circuls.each do |circul| %>
         <li>
           <% if params[:search] %>
@@ -26,16 +27,14 @@
             <%= render circul %>
           <% end %>
         </li>
-
-
         <% end %>
-
       </ul>
-<%= submit_tag "Search", name: nil %>
-<% end %>
+    <%= submit_tag "Search", name: nil %>
+  <% end %>
+</div>
 
   <h1>תצוגה לפי חודשים</h1>
-  <table id="month" class="table datatable">
+  <table id="month" class="table datatable" width="100px">
     <thead>
       <tr>
         <td>שנה</td>
