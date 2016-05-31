@@ -1,6 +1,6 @@
 class CreateFriends < ActiveRecord::Migration
   def change
-    create_table :friendas do |t|
+    create_table :friends do |t|
       t.string :name
       t.string :lname
       t.string :phone
