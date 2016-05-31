@@ -7,9 +7,9 @@ class Event < ActiveRecord::Base
   has_many :circuls, :through => :events_circuls
   accepts_nested_attributes_for :events_circuls, :allow_destroy => true
 
-  has_many :events_friends, :dependent => :destroy
-  has_many :friends, :through => :events_friends
-  accepts_nested_attributes_for :events_friends, :allow_destroy => true
+  # has_many :events_friends, :dependent => :destroy
+  # has_many :friends, :through => :events_friends
+  # accepts_nested_attributes_for :events_friends, :allow_destroy => true
 
 
 def monther
