@@ -3,6 +3,11 @@ class Friend < ActiveRecord::Base
   has_many :circuls, :through => :friends_circuls
   accepts_nested_attributes_for :friends_circuls, :allow_destroy => true
 
+  has_many :events_friends, :dependent => :destroy
+  has_many :events, :through => :events_friends
+  accepts_nested_attributes_for :events_friends, :allow_destroy => true
+
+
   validates :name, :lname,  presence: true
 
   def name_with_initial

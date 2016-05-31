@@ -26,4 +26,19 @@ module FriendsHelper
     a
   end
 
+  def indevidual_evets_counter_days(all_my_events)
+    a = []
+    all_my_events.each do |event|
+      a << event.days if event.days.present?
+    end
+    a
+  end
+
+  def indevidual_evets_counter_nights(all_my_events)
+    a = []
+    all_my_events.each do |event|
+      a << event.nights if event.nights.present?
+    end
+    a
+  end
 end

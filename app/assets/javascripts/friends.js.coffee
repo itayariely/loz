@@ -23,4 +23,5 @@ jQuery ->
    $('#month').dataTable
      paging: false
      scrollX: true
-    #  sScrollY: "100px"
+     bFilter: false
+     bInfo: false

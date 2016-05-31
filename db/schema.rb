@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160508130512) do
+ActiveRecord::Schema.define(version: 20160530164930) do
 
   create_table "circuls", force: :cascade do |t|
     t.string   "name"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 20160508130512) do
     t.integer  "status",     default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "events_friends", force: :cascade do |t|
+    t.integer  "friend_id"
+    t.integer  "event_id"
+    t.integer  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friends", force: :cascade do |t|

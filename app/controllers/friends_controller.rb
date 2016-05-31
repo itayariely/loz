@@ -6,8 +6,9 @@ class FriendsController < ApplicationController
   def index
     @friends = Friend.all
     # @circuls = Circul.all
-        @circuls = Circul.where(father_circul_id: [0, nil]).order(:name)
+    @circuls = Circul.where(father_circul_id: [0, nil]).order(:name)
     @events  = Event.all
+
   end
 
   # GET /friends/1

@@ -1,4 +1,15 @@
-
+<style>
+div.dataTables_wrapper {
+        width: 800px;
+        margin: 0 auto;
+    }
+td {
+  /*padding-right: 10px;*/
+  /*text-align: right;*/
+  /*min-width: inherit;*/
+  /*padding: 20px;*/
+}
+</style>
 <p id="notice"><%= notice %></p>
 <div class="row" dir="rtl">
 
@@ -34,7 +45,7 @@
 </div>
 
   <h1>תצוגה לפי חודשים</h1>
-  <table id="month" class="table datatable" width="100px">
+  <table id="month"  class="table display nowrap" cellspacing="0" width="100%">
     <thead>
       <tr>
         <td>שנה</td>
@@ -50,6 +61,7 @@
         <td>אוקטובר</td>
         <td>נובמבר</td>
         <td>דצמבר</td>
+
     </tr>
     </thead>
   <tbody>
@@ -62,14 +74,16 @@
 
             <% if yearshow == event.start_at.year %>
 
-            <% if firstline == false %>
-              <% while monthcount <= 12 %>
-            </ul></td><td><ul>
+              <% if firstline == false %>
+                <% while monthcount <= 11 %>
+                  </ul></td><td><ul>
                   <% monthcount = monthcount+1 %>
-              <% end %>
+                <% end %>
+              </ul></td>
               <% monthcount = 1 %>
               </tr><tr>
-              <% end %>
+            <% end %>
+
               <td><ul>
 
                 <%= event.start_at.year %>
@@ -82,22 +96,35 @@
               <% end %>
 
               <% while monthcount != event.start_at.month  do %>
-                <% monthcount = monthcount+1 %>
-                </td><td>
+                  </ul></td><td><ul>
+                  <% monthcount = monthcount+1 %>
               <% end %>
 
               <% if event.start_at.month == monthcount %>
-              <% if params[:search] %>
-                <% a = get_event_circuls(event.circuls) %>
-                <% b = params[:search] %>
-                <% b = eval b.to_s.gsub('"', '') %>
-                <% c = (a & b).empty? %>
-              <% end %>
-                <li class=<%= "hidden" if c %> >
-                  <%= event.name %>
+                <% if params[:search] %>
+                  <% a = get_event_circuls(event.circuls) %>
+                  <% b = params[:search] %>
+                  <% b = eval b.to_s.gsub('"', '') %>
+                  <% c = (a & b).empty? %>
+                <% end %>
+                <li <%= "class='hidden'" if c %> >
+                  <%= link_to event.name, event %>
                 </li>
-              <% end %>
+            <% end %>
+<% if event == @events.last %>
+  <% if yearshow != event.start_at.year %>
 
+    <% if firstline == false %>
+      <% while monthcount <= 11 %>
+        </ul></td><td><ul>
+        <% monthcount = monthcount+1 %>
+      <% end %>
+      </ul></td>
+    <% monthcount = 1 %>
+
+  <% end %>
+<% end %>
+<% end %>
 
           <% end %>
         </ul>
@@ -152,6 +179,7 @@
         <td>
           <% if friend.circuls.any? %>
           <%  days = days_counter(a).inject(0, :+) %>
+          <% days += indevidual_evets_counter_days(friend.events).inject(0, :+) %>
           <% present = (days * 100 / 104) %>
           <div class="progress">
             <div class="progress-bar progress-bar-<%= progress_color(present) %>" style="width: <%= present %>%">
@@ -164,6 +192,7 @@
         <td>
           <% if friend.circuls.any? %>
           <%  nights = nights_counter(a).inject(0, :+) %>
+          <% nights += indevidual_evets_counter_nights(friend.events).inject(0, :+) %>
           <% present = (nights * 100 / 52) %>
           <div class="progress">
             <div class="progress-bar progress-bar-<%= progress_color(present) %>" style="width: <%= present %>%">
