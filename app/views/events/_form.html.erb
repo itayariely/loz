@@ -69,30 +69,30 @@
 </div>
 
 --
-<%= f.label "מיועד לחברות וחברים:" %><br>
+<!-- <%= f.label "מיועד לחברות וחברים:" %><br>
 
 <div class="row">
 <table class="table">
 <tr>
-    <% i = 1 %>
-    <%= f.collection_check_boxes :friend_ids, Friend.all, :id, :name_with_initial do |ff| %>
-            <%# f.collection_check_boxes(:circul_ids, Circul.all, :id, :initial_name) do |ff| %>
-      <% if i == 8 %>
-        <%= "</tr><tr>".html_safe %>
-        <% i = 1 %>
-      <% end %>
-      <%= ff.label(class: "check_box") do %>
+    <%# i = 1 %>
+    <%# f.collection_check_boxes :friend_ids, Friend.all, :id, :name_with_initial do |ff| %>
+            <%## f.collection_check_boxes(:circul_ids, Circul.all, :id, :initial_name) do |ff| %>
+      <%# if i == 8 %>
+        <%#= "</tr><tr>".html_safe %>
+        <%# i = 1 %>
+      <%# end %>
+      <%# ff.label(class: "check_box") do %>
         <td>
-          <%= ff.check_box(class: "check_box") %>
-          <%= ff.object.name %>
+          <%#= ff.check_box(class: "check_box") %>
+          <%# ff.object.name %>
         </td>
-      <% end %>
-      <% i = i+1 %>
-    <% end %>
+      <%# end %>
+      <%# i = i+1 %>
+    <%# end %>
 
 </tr>
 </table>
-</div>
+</div> -->
 --
 
   </div>
