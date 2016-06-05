@@ -26,6 +26,15 @@ module FriendsHelper
     a
   end
 
+  def indevidual_event_counter(all_my_events)
+    a = []
+    all_my_events.each do |event|
+      a << event.id
+    end
+    a.flatten.uniq
+  end
+
+
   def indevidual_evets_counter_days(all_my_events)
     a = []
     all_my_events.each do |event|

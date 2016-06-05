@@ -122,7 +122,8 @@ td {
         </td>
         <td>
           <% if friend.circuls.any? %>
-            <%  events = event_counter(a).count %>
+          <%  events = event_counter(a).count %>
+            <% events +=  indevidual_event_counter(friend.events).count %>
             <% present = (events * 100 / 52) %>
             <div class="progress">
               <div class="progress-bar progress-bar-<%= progress_color(present) %>" style="width: <%= present %>%">
@@ -134,7 +135,7 @@ td {
         <td>
           <% if friend.circuls.any? %>
           <%  days = days_counter(a).inject(0, :+) %>
-          <%# days += indevidual_evets_counter_days(friend.events).inject(0, :+) %>
+          <% days += indevidual_evets_counter_days(friend.events).inject(0, :+) %>
           <% present = (days * 100 / 104) %>
           <div class="progress">
             <div class="progress-bar progress-bar-<%= progress_color(present) %>" style="width: <%= present %>%">
@@ -147,7 +148,7 @@ td {
         <td>
           <% if friend.circuls.any? %>
           <%  nights = nights_counter(a).inject(0, :+) %>
-          <%# nights += indevidual_evets_counter_nights(friend.events).inject(0, :+) %>
+          <% nights += indevidual_evets_counter_nights(friend.events).inject(0, :+) %>
           <% present = (nights * 100 / 52) %>
           <div class="progress">
             <div class="progress-bar progress-bar-<%= progress_color(present) %>" style="width: <%= present %>%">
