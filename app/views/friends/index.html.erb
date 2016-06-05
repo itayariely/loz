@@ -13,78 +13,80 @@ td {
 <p id="notice"><%= notice %></p>
 <div class="row" dir="rtl">
 <% he_month = ["", "ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"] %>
-<div class="month_scroll_div">
 
 <% year =  DateTime.now.year %>
 
-<table class="table">
-  <tr>
-<% he_month.each do |month| %>
-  <td><%= month %></td>
-<% end %>
-</tr>
-<% 2.times do %>
-  <tr>
-    <td><%= year %></td>
-    <% i = 1 %>
-
-    <% 12.times do %>
-    <td>
-      <% @events.where(start_at: Date.new(year,i,13).beginning_of_month..Date.new(year,i,13).end_of_month).each do |event| %>
-
-        <% if params[:search] %>
-          <% a = get_event_circuls(event.circuls) %>
-          <% b = params[:search] %>
-          <% b = eval b.to_s.gsub('"', '') %>
-          <% c = (a & b).empty? %>
-        <% end %>
-        <li  class="event">
-        <div <%= "style=display:none;" if c %> class="btn btn-default">
-          <%= link_to event.name, event %>
-        </div>
-  </li>
-      <% end %>
-
-      <% i = i+1 %>
-    </td>
-    <% end %>
-  </tr>
-  <% year = DateTime.now.year+1 %>
-<% end %>
-</table>
-</div>
-
-<a class="btn btn-primary showsort" href="#" onclick="$('#target').toggle();">הצג/הסתר סינון סמינרים לפי מעגלים</a>
-<div style="display: none" id="target">
-  <%= form_tag friends_path, :method => 'get' do %>
+<div>
+  <a class="btn btn-primary showsort" href="#" onclick="$('#target').toggle();">הצג/הסתר סינון סמינרים לפי מעגלים</a>
+  <div style="display: none" id="target">
+    <%= form_tag friends_path, :method => 'get' do %>
     <ul class="tree">
       <% @circuls.each do |circul| %>
-        <li>
-          <% if params[:search] %>
-            <% b = eval params[:search].to_s.gsub('"', '') %>
-            <% if b.include? circul.id %>
-              <%= check_box_tag 'search[]', circul.id, true %>
-            <% else %>
-              <%= check_box_tag 'search[]', circul.id %>
-            <% end %>
-          <% else %>
-            <%= check_box_tag 'search[]', circul.id %>
-          <% end %>
-
-          <%= h circul.name %>
-          <% if circul.children.any? %>
-            <% @par = "friends" %>
-            <%= render circul %>
-          <% end %>
-        </li>
+      <li>
+        <% if params[:search] %>
+        <% b = eval params[:search].to_s.gsub('"', '') %>
+        <% if b.include? circul.id %>
+        <%= check_box_tag 'search[]', circul.id, true %>
+        <% else %>
+        <%= check_box_tag 'search[]', circul.id %>
         <% end %>
-      </ul>
+        <% else %>
+        <%= check_box_tag 'search[]', circul.id %>
+        <% end %>
+
+        <%= h circul.name %>
+        <% if circul.children.any? %>
+        <% @par = "friends" %>
+        <%= render circul %>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
     <%= submit_tag "Search", name: nil %>
-  <% end %>
+    <% end %>
+
+  </div>
+
 
 </div>
+<br />
+<% 2.times do %>
+  <div class="month_scroll_div">
+    <table class="table">
+      <tr>
+    <% he_month.each do |month| %>
+      <td><%= month %></td>
+    <% end %>
+    </tr>
+      <tr>
+        <td><%= year %></td>
+        <% i = 1 %>
 
+        <% 12.times do %>
+        <td>
+          <% @events.where(start_at: Date.new(year,i,13).beginning_of_month..Date.new(year,i,13).end_of_month).each do |event| %>
 
+            <% if params[:search] %>
+              <% a = get_event_circuls(event.circuls) %>
+              <% b = params[:search] %>
+              <% b = eval b.to_s.gsub('"', '') %>
+              <% c = (a & b).empty? %>
+            <% end %>
+            <li  class="event">
+            <div <%= "style=display:none;" if c %> class="btn btn-default">
+              <%= link_to event.name, event %>
+            </div>
+      </li>
+          <% end %>
+
+          <% i = i+1 %>
+        </td>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+<% year = DateTime.now.year+1 %>
+<% end %>
 </div>
 <h1>רשימת חברים</h1>
 
