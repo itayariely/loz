@@ -55,5 +55,17 @@
   <%= @event.color %>
 </p>
 
+<p>
+  <strong>מעגלים:</strong>
+  <ul>
+    <% @event.circuls.each do |circul| %>
+      <li>
+        <%= circul.name %>
+      </li>
+    <% end %>
+</ul>
+</p>
+
+
 <%= link_to 'עריכה', edit_event_path(@event) %> |
 <%= link_to 'חזרה', events_path %>
