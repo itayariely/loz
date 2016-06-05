@@ -73,8 +73,8 @@ td {
               <% c = (a & b).empty? %>
             <% end %>
             <li  class="event">
-            <div <%= "style=display:none;" if c %> class="btn btn-default">
-              <%= link_to event.name, event %>
+            <div <%= "style=display:none;" if c %> >
+              <%= link_to event.name, event, class: "btn btn-default" %>
             </div>
       </li>
           <% end %>
