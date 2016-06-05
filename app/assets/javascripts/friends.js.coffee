@@ -9,10 +9,6 @@
 #     bServerSide: true
 #     sAjaxSource: $('#friends').data('source')
 jQuery ->
-  $('#showsort').on "click", ->
-    $('#sortdiv').css
-      display: "block"
-
    $('#friends').dataTable
      aaSorting: [[ 7, "DESC" ]]
      paging: false

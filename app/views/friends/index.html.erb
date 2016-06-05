@@ -12,11 +12,41 @@ td {
 </style>
 <p id="notice"><%= notice %></p>
 <div class="row" dir="rtl">
+<% he_month = ["", "ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"] %>
+<table class="table">
+  <tr>
+<% he_month.each do |month| %>
+  <td><%= month %></td>
+<% end %>
+</tr>
+<tr>
+  <td>2016</td>
+  <% i = 1 %>
 
+  <% 12.times do %>
+  <td>
+    <% @events.where(start_at: Date.new(2016,i,13).beginning_of_month..Date.new(2016,i,13).end_of_month).each do |event| %>
 
+      <% if params[:search] %>
+        <% a = get_event_circuls(event.circuls) %>
+        <% b = params[:search] %>
+        <% b = eval b.to_s.gsub('"', '') %>
+        <% c = (a & b).empty? %>
+      <% end %>
+      <li <%= "style=display:none;" if c %> >
+        <%= link_to event.name, event %>
+      </li>
 
-<a class="btn btn-primary showsort" href="#" id="showsort">סינון סמינרים לפי מעגלים</a>
-<div style="display:none;" id="sortdiv">
+    <% end %>
+
+    <% i = i+1 %>
+  </td>
+  <% end %>
+</tr>
+</table>
+
+<a class="btn btn-primary showsort" href="#" onclick="$('#target').toggle();">הצג/הסתר סינון סמינרים לפי מעגלים</a>
+<div style="display: none" id="target">
   <%= form_tag friends_path, :method => 'get' do %>
     <ul class="tree">
       <% @circuls.each do |circul| %>
@@ -42,96 +72,10 @@ td {
       </ul>
     <%= submit_tag "Search", name: nil %>
   <% end %>
+
 </div>
 
-  <h1>תצוגה לפי חודשים</h1>
-  <table id="month"  class="table display nowrap" cellspacing="0" width="100%">
-    <thead>
-      <tr>
-        <td>שנה</td>
-        <td>ינואר</td>
-        <td>פברואר</td>
-        <td>מרץ</td>
-        <td>אפריל</td>
-        <td>מאי</td>
-        <td>יוני</td>
-        <td>יולי</td>
-        <td>אוגוסט</td>
-        <td>ספטמבר</td>
-        <td>אוקטובר</td>
-        <td>נובמבר</td>
-        <td>דצמבר</td>
 
-    </tr>
-    </thead>
-  <tbody>
-    <tr>
-          <% yearshow =  @events.order(:start_at).first.start_at.year %>
-          <% firstline = true %>
-          <% monthcount = 1 %>
-
-          <% @events.order(:start_at).each do |event| %>
-
-            <% if yearshow == event.start_at.year %>
-
-              <% if firstline == false %>
-                <% while monthcount <= 11 %>
-                  </ul></td><td><ul>
-                  <% monthcount = monthcount+1 %>
-                <% end %>
-              </ul></td>
-              <% monthcount = 1 %>
-              </tr><tr>
-            <% end %>
-
-              <td><ul>
-
-                <%= event.start_at.year %>
-                <% firstline = false %>
-                <% yearshow = yearshow + 1 %>
-                <% monthcount == 1 %>
-              </td>
-              <td>
-
-              <% end %>
-
-              <% while monthcount != event.start_at.month  do %>
-                  </ul></td><td><ul>
-                  <% monthcount = monthcount+1 %>
-              <% end %>
-
-              <% if event.start_at.month == monthcount %>
-                <% if params[:search] %>
-                  <% a = get_event_circuls(event.circuls) %>
-                  <% b = params[:search] %>
-                  <% b = eval b.to_s.gsub('"', '') %>
-                  <% c = (a & b).empty? %>
-                <% end %>
-                <li <%= "class='hidden'" if c %> >
-                  <%= link_to event.name, event %>
-                </li>
-            <% end %>
-<% if event == @events.last %>
-  <% if yearshow != event.start_at.year %>
-
-    <% if firstline == false %>
-      <% while monthcount <= 11 %>
-        </ul></td><td><ul>
-        <% monthcount = monthcount+1 %>
-      <% end %>
-      </ul></td>
-    <% monthcount = 1 %>
-
-  <% end %>
-<% end %>
-<% end %>
-
-          <% end %>
-        </ul>
-        </td>
-    </tr>
-  </tbody>
-</table>
 </div>
 <h1>רשימת חברים</h1>
 

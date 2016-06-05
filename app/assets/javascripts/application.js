@@ -53,7 +53,4 @@ $( document ).ready(function() {
     $(this).children('.plus').text("+");
 
   });
-
-
-
 });
