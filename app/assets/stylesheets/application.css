@@ -10,7 +10,10 @@
  *= require fullcalendar
  *= require_tree .
 */
+thead th{
+  text-align: right;
 
+}
 .event{
   list-style-type: none;
   margin-bottom: 5px;
