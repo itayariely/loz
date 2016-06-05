@@ -10,7 +10,7 @@
 #     sAjaxSource: $('#friends').data('source')
 jQuery ->
    $('#friends').dataTable
-     aaSorting: [[ 7, "DESC" ]]
+     aaSorting: [[ 6, "DESC" ]]
      paging: false
      dom: '<"top"f>'
      oLanguage:
