@@ -33,10 +33,11 @@ td {
         <% b = eval b.to_s.gsub('"', '') %>
         <% c = (a & b).empty? %>
       <% end %>
-      <li <%= "style=display:none;" if c %> >
+      <li  class="event">
+      <div <%= "style=display:none;" if c %> class="btn btn-default">
         <%= link_to event.name, event %>
-      </li>
-
+      </div>
+</li>
     <% end %>
 
     <% i = i+1 %>

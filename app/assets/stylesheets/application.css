@@ -11,6 +11,13 @@
  *= require_tree .
 */
 
+
+.event{
+  list-style-type: none;
+  margin-bottom: 5px;
+
+}
+
 .toptop{
   vertical-align: top;
   /*padding: 5px;*/
