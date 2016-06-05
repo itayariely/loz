@@ -1,0 +1,89 @@
+
+  <h1>תצוגה לפי חודשים</h1>
+  <table id="month"  class="table display nowrap" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <td>שנה</td>
+        <td>ינואר</td>
+        <td>פברואר</td>
+        <td>מרץ</td>
+        <td>אפריל</td>
+        <td>מאי</td>
+        <td>יוני</td>
+        <td>יולי</td>
+        <td>אוגוסט</td>
+        <td>ספטמבר</td>
+        <td>אוקטובר</td>
+        <td>נובמבר</td>
+        <td>דצמבר</td>
+
+    </tr>
+    </thead>
+  <tbody>
+    <tr>
+          <% yearshow =  @events.order(:start_at).first.start_at.year %>
+          <% firstline = true %>
+          <% monthcount = 1 %>
+
+          <% @events.order(:start_at).each do |event| %>
+
+            <% if yearshow == event.start_at.year %>
+
+              <% if firstline == false %>
+                <% while monthcount <= 11 %>
+                  </ul></td><td><ul>
+                  <% monthcount = monthcount+1 %>
+                <% end %>
+              </ul></td>
+              <% monthcount = 1 %>
+              </tr><tr>
+            <% end %>
+
+              <td><ul>
+
+                <%= event.start_at.year %>
+                <% firstline = false %>
+                <% yearshow = yearshow + 1 %>
+                <% monthcount == 1 %>
+              </td>
+              <td>
+
+              <% end %>
+
+              <% while monthcount != event.start_at.month  do %>
+                  </ul></td><td><ul>
+                  <% monthcount = monthcount+1 %>
+              <% end %>
+
+              <% if event.start_at.month == monthcount %>
+                <% if params[:search] %>
+                  <% a = get_event_circuls(event.circuls) %>
+                  <% b = params[:search] %>
+                  <% b = eval b.to_s.gsub('"', '') %>
+                  <% c = (a & b).empty? %>
+                <% end %>
+                <li <%= "class='hidden'" if c %> >
+                  <%= link_to event.name, event %>
+                </li>
+            <% end %>
+<% if event == @events.last %>
+  <% if yearshow != event.start_at.year %>
+
+    <% if firstline == false %>
+      <% while monthcount <= 11 %>
+        </ul></td><td><ul>
+        <% monthcount = monthcount+1 %>
+      <% end %>
+      </ul></td>
+    <% monthcount = 1 %>
+
+  <% end %>
+<% end %>
+<% end %>
+
+          <% end %>
+        </ul>
+        </td>
+    </tr>
+  </tbody>
+</table>
