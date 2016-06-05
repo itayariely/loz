@@ -96,8 +96,8 @@ td {
       <th>שם</th>
       <th>שם משפחה</th>
       <th>טלפון</th>
-      <th>דוא"ל"</th>
-      <th>תאריך לידה</th>
+      <!-- <th>דוא"ל"</th> -->
+      <!-- <th>תאריך לידה</th> -->
       <th>חבר/ה המספר מעגלים</th>
       <th>צריך/ה לבוא לסמינרים</th>
       <th>בסך הכל ימים</th>
@@ -114,8 +114,8 @@ td {
         <td><%= link_to friend.name, friend %></td>
         <td><%= friend.lname %></td>
         <td><%= friend.phone %></td>
-        <td><%= friend.email %></td>
-        <td><%= friend.birth_date %></td>
+        <!-- <td><%# friend.email %></td> -->
+        <!-- <td><%# friend.birth_date %></td> -->
         <td>
           <% a = friend.all_parent_getter if friend.circuls.any? %>
           <%= a.count if friend.circuls.any? %>
