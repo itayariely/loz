@@ -33,3 +33,10 @@
 #       starts_at: "" + the_event.start,
 #       ends_at: "" + the_event.end,
 #       description: the_event.description
+jQuery ->
+   $('#events').dataTable
+     aaSorting: [[1, 'asc']]
+     paging: false
+     dom: '<"top"f>'
+     oLanguage:
+      sSearch: "חיפוש:"
