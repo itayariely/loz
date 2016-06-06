@@ -77,6 +77,15 @@ class EventsController < ApplicationController
   end
 
 
+  def approved
+    set_event.approval!(set_event)
+    redirect_to session.delete(:return_to) || :back, notice: " #{@event.name.to_s} אושר"
+  end
+
+  def draft
+    set_event.drafting!(set_event)
+    redirect_to session.delete(:return_to) || :back, notice: " #{@event.name.to_s} בוטל"
+  end
 
 
 

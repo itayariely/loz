@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
 
   enum time: [ :ימות_השבוע, :סופש]
   enum mosa: [ :הכשרה, :לחניכים]
+  enum status: [ :draft, :approved]
 
   has_many :events_circuls, :dependent => :destroy
   has_many :circuls, :through => :events_circuls
@@ -25,4 +26,13 @@ validates :name, :days, :nights, :start_at, :end_at,  presence: true
     Time.at(date_time.to_i).to_formatted_s(:db)
   end
 
+  def approval!(event)
+    d = event
+    d.approved!
+  end
+
+  def drafting!(event)
+    d = event
+    d.draft!
+  end
 end

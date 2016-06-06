@@ -74,7 +74,8 @@ td {
             <% end %>
             <li  class="event">
             <div <%= "style=display:none;" if c %> >
-              <%= link_to event.name, event, class: "btn btn-default" %>
+              <% btn_class = event.approved? ? "btn btn-success" : "btn btn-default" %>
+              <%= link_to event.name, event, class: btn_class %>
             </div>
       </li>
           <% end %>
@@ -88,6 +89,7 @@ td {
 <% year = DateTime.now.year+1 %>
 <% end %>
 </div>
+<%# link_to "יצא קובץ אקסל ", friends_path(format: "xls"), :class => "button small-4 radius" %>
 <h1>רשימת חברים</h1>
 
 <table id="friends" class="table datatable">

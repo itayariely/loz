@@ -7,5 +7,11 @@ Rails.application.routes.draw do
   resources :circuls
   resources :friends
 
+  resources :events do
+  	member do
+        post :approved
+        post :draft
+  	end
+  end
 
 end

@@ -66,6 +66,11 @@
 </ul>
 </p>
 
+<% if @event.draft? %>
+<%= link_to "אישור", approved_event_path(@event), method: :post, class: "btn btn-success" %>
+<% else %>
+<%= link_to "ביטול", draft_event_path(@event), method: :post, class: "btn btn-warning" %>
+<% end %>
 
-<%= link_to 'עריכה', edit_event_path(@event) %> |
-<%= link_to 'חזרה', events_path %>
+<%= link_to 'עריכה', edit_event_path(@event), class: "btn btn-default" %>
+<%= link_to 'חזרה', events_path, class: "btn btn-default" %>
