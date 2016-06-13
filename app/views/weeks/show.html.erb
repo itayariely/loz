@@ -41,6 +41,27 @@
   <%= "<span class='label label-default'>ו'</span>".html_safe if @week.day_f == 2 %>
   <%= "<span class='label label-default'>שבת</span>".html_safe if @week.day_s == 2 %>
 </p>
+<p>
+  <strong>הערות:</strong>
+  <%= @week.notes %>
+</p>
+<p>
+  <strong>מיועד למעגלים:</strong>
+  <ul>
+    <% @week.circuls.each do |circul| %>
+      <%= content_tag(:li, circul.name)  %>
+    <% end %>
+  </ul>
+</p>
+<p>
+  <strong>חברים שצורפו:</strong>
+  <ul>
+    <% @week.friends.each do |friend| %>
+      <%= content_tag(:li, friend.name)  %>
+    <% end %>
+  </ul>
+</p>
+
 
 <%= link_to 'עריכה', edit_week_path(@week), class: "btn btn-default" %>
 <%= link_to 'חזרה', weeks_path, class: "btn btn-default" %>

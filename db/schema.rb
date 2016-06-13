@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613072243) do
+ActiveRecord::Schema.define(version: 20160613080751) do
+
+  create_table "circul_week_relations", force: :cascade do |t|
+    t.integer  "circul_id"
+    t.integer  "week_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "circuls", force: :cascade do |t|
     t.string   "name"
@@ -51,6 +58,13 @@ ActiveRecord::Schema.define(version: 20160613072243) do
     t.integer  "friend_id"
     t.integer  "event_id"
     t.integer  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "friend_week_relations", force: :cascade do |t|
+    t.integer  "friend_id"
+    t.integer  "week_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -95,6 +109,7 @@ ActiveRecord::Schema.define(version: 20160613072243) do
     t.integer  "day_e",      default: 0
     t.integer  "day_f",      default: 0
     t.integer  "day_s",      default: 0
+    t.text     "notes"
   end
 
 end

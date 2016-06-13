@@ -55,6 +55,6 @@ class WeeksController < ApplicationController
     end
 
     def week_params
-      params.require(:week).permit(:name, :frequency, :houers, :tomezon, :day_a, :day_b, :day_c, :day_d, :day_e, :day_f, :day_s, :week_day_ids => [])
+      params.require(:week).permit(:name, :frequency, :houers, :tomezon, :day_a, :day_b, :day_c, :day_d, :day_e, :day_f, :day_s, :notes, :week_day_ids => [], :circul_ids => [], :friend_ids => [])
     end
 end
