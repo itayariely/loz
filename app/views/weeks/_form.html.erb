@@ -15,6 +15,35 @@
   <div class="field">
     <%= f.input :tomezon, collection: Week.tomezons.keys, label: "מתי במהלך היום:" %>
   </div>
+
+  <div class="field">
+    יום א':
+    <%= f.collection_radio_buttons :day_a, [[0, 'נטרלי'], [1, 'מתאים'] ,[2, 'לא מתאים']], :first, :last %>
+  </div>
+  <div class="field">
+    יום ב':
+    <%= f.collection_radio_buttons :day_b, [[0, 'נטרלי'], [1, 'מתאים'] ,[2, 'לא מתאים']], :first, :last %>
+  </div>
+  <div class="field">
+    יום ג':
+    <%= f.collection_radio_buttons :day_c, [[0, 'נטרלי'], [1, 'מתאים'] ,[2, 'לא מתאים']], :first, :last %>
+  </div>
+  <div class="field">
+    יום ד':
+    <%= f.collection_radio_buttons :day_d, [[0, 'נטרלי'], [1, 'מתאים'] ,[2, 'לא מתאים']], :first, :last %>
+  </div>
+  <div class="field">
+    יום ה':
+    <%= f.collection_radio_buttons :day_e, [[0, 'נטרלי'], [1, 'מתאים'] ,[2, 'לא מתאים']], :first, :last %>
+  </div>
+  <div class="field">
+    יום ו':
+    <%= f.collection_radio_buttons :day_f, [[0, 'נטרלי'], [1, 'מתאים'] ,[2, 'לא מתאים']], :first, :last %>
+  </div>
+  <div class="field">
+    יום שבת':
+    <%= f.collection_radio_buttons :day_s, [[0, 'נטרלי'], [1, 'מתאים'] ,[2, 'לא מתאים']], :first, :last %>
+  </div>
   <div class="actions">
     <%= f.submit "שמירה" %>
   </div>
