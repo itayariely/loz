@@ -7,6 +7,8 @@
       <th>תדירות</th>
       <th>כמה שעות</th>
       <th>זמן ביום</th>
+      <th>ימים מועדפים</th>
+      <th>ימים לא אפשריים</th>
     </tr>
   </thead>
 
@@ -17,6 +19,24 @@
         <td><%= week.frequency %></td>
         <td><%= week.houers %></td>
         <td><%= week.tomezon %></td>
+        <td>
+          <%= "<span class='label label-default'>א'</span>".html_safe if week.day_a == 1 %>
+          <%= "<span class='label label-default'>ב'</span>".html_safe if week.day_b == 1 %>
+          <%= "<span class='label label-default'>ג'</span>".html_safe if week.day_c == 1 %>
+          <%= "<span class='label label-default'>ד'</span>".html_safe if week.day_d == 1 %>
+          <%= "<span class='label label-default'>ה'</span>".html_safe if week.day_e == 1 %>
+          <%= "<span class='label label-default'>ו'</span>".html_safe if week.day_f == 1 %>
+          <%= "<span class='label label-default'>שבת</span>".html_safe if week.day_s == 1 %>
+        </td>
+        <td>
+          <%= "<span class='label label-default'>א'</span>".html_safe if week.day_a == 2 %>
+          <%= "<span class='label label-default'>ב'</span>".html_safe if week.day_b == 2 %>
+          <%= "<span class='label label-default'>ג'</span>".html_safe if week.day_c == 2 %>
+          <%= "<span class='label label-default'>ד'</span>".html_safe if week.day_d == 2 %>
+          <%= "<span class='label label-default'>ה'</span>".html_safe if week.day_e == 2 %>
+          <%= "<span class='label label-default'>ו'</span>".html_safe if week.day_f == 2 %>
+          <%= "<span class='label label-default'>שבת</span>".html_safe if week.day_s == 2 %>
+        </td>
         <td><%= link_to 'הצגה', week, class: "btn btn-default" %></td>
         <td><%= link_to 'עריכה', edit_week_path(week), class: "btn btn-default" %></td>
         <td><%= link_to 'מחיקה', week, method: :delete, data: { confirm: 'למחוק?' }, class: "btn btn-default" %></td>
