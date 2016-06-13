@@ -5,4 +5,5 @@ class Week < ActiveRecord::Base
 
   has_many :week_days, :dependent => :destroy
 
+  validates :name, :frequency, :houers, :tomezon, presence: true
 end
