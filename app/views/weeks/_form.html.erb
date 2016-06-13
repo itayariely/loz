@@ -1,0 +1,21 @@
+<%= simple_form_for(@week) do |f| %>
+
+  <div class="field">
+    <%= f.input :name, label: "שם:" %>
+  </div>
+
+  <div class="field">
+    <%= f.input :frequency, collection: Week.frequencies.keys, label: "תדירות:" %>
+  </div>
+
+  <div class="field">
+    <%= f.input :houers, label: "כמה שעות דרושות:" %>
+  </div>
+
+  <div class="field">
+    <%= f.input :tomezon, collection: Week.tomezons.keys, label: "מתי במהלך היום:" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "שמירה" %>
+  </div>
+<% end %>

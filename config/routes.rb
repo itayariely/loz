@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :events
   resources :circuls
   resources :friends
+  resources :weeks
 
   resources :events do
   	member do

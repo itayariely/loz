@@ -1,0 +1,31 @@
+<h1>בקשות לשבוע</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>שם</th>
+      <th>תדירות</th>
+      <th>כמה שעות</th>
+      <th>זמן ביום</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @weeks.each do |week| %>
+      <tr>
+        <td><%= week.name %></td>
+        <td><%= week.frequency %></td>
+        <td><%= week.houers %></td>
+        <td><%= week.tomezon %></td>
+        <td><%= link_to 'הצגה', week, class: "btn btn-default" %></td>
+        <td><%= link_to 'עריכה', edit_week_path(week), class: "btn btn-default" %></td>
+        <td><%= link_to 'מחיקה', week, method: :delete, data: { confirm: 'למחוק?' }, class: "btn btn-default" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'אירוע חדש', new_week_path %>
+<div id='calendar'></div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530164930) do
+ActiveRecord::Schema.define(version: 20160606142617) do
 
   create_table "circuls", force: :cascade do |t|
     t.string   "name"
@@ -71,6 +71,23 @@ ActiveRecord::Schema.define(version: 20160530164930) do
     t.integer  "status",     default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "week_days", force: :cascade do |t|
+    t.integer  "week_id"
+    t.string   "name"
+    t.integer  "wonted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "weeks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "frequency"
+    t.integer  "houers"
+    t.integer  "tomezon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>שם:</strong>
+  <%= @week.name %>
+</p>
+
+<p>
+  <strong>תדירות:</strong>
+  <%= @week.frequency %>
+</p>
+
+<p>
+  <strong>כמה שעות דרושות:</strong>
+  <%= @week.houers %>
+</p>
+
+<p>
+  <strong>מתי במהלך היום:</strong>
+  <%= @week.tomezon %>
+</p>
+
+<%= link_to 'עריכה', edit_week_path(@week), class: "btn btn-default" %>
+<%= link_to 'חזרה', weeks_path, class: "btn btn-default" %>
