@@ -65,6 +65,16 @@
     <% end %>
 </ul>
 </p>
+<p>
+  <strong>חברים:</strong>
+  <ul>
+    <% @event.friends.each do |friend| %>
+      <li>
+        <%= friend.name_with_initial %>
+      </li>
+    <% end %>
+</ul>
+</p>
 
 <% if @event.draft? %>
 <%= link_to "אישור", approved_event_path(@event), method: :post, class: "btn btn-success" %>
