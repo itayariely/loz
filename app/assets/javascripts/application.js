@@ -56,9 +56,9 @@ $( document ).ready(function() {
 	});
 
 	 $('#weeks').DataTable( {
-		"sScrollY": "300px",
+		// "sScrollY": "300px",
 		"paging": false,
-		"scrollX": true,
-		"order": [[ 2, "desc" ]]
+		// "scrollX": true,
+		// "order": [[ 2, "desc" ]]
 	} );
 });
