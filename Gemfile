@@ -21,7 +21,7 @@ group :development do
   gem 'hirb'
 end
 group :production do
-    # gem 'pg'
+    gem 'pg'
 end
 
 gem 'ckeditor_rails'
