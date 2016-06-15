@@ -5,6 +5,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -20,7 +21,7 @@ group :development do
   gem 'hirb'
 end
 group :production do
-  gem 'pg'
+    # gem 'pg'
 end
 
 gem 'ckeditor_rails'
@@ -38,3 +39,13 @@ gem 'momentjs-rails'
 gem 'fullcalendar-bootstrap-rails'
 gem 'gon'
 gem 'simple_form'
+
+
+
+
+gem 'rubyzip', '= 1.0.0'
+gem 'axlsx', '= 2.0.1'
+gem 'axlsx_rails'
+
+gem 'acts_as_xlsx',
+  :git => "git://github.com/straydogstudio/acts_as_xlsx.git"

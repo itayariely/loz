@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap-sprockets
+//= require jquery.turbolinks
 //= require turbolinks
 //= require ckeditor-jquery
 //= require bootstrap-sprockets
@@ -45,12 +46,19 @@
 
 $( document ).ready(function() {
 	$('.links_shower').mouseover(function(){
-    $(this).children('.links').css("visibility", "inherit");
-    $(this).children('.plus').text("-");
-  })
-  .mouseout(function(){
-    $(this).children('.links').css("visibility", "hidden");
-    $(this).children('.plus').text("+");
+		$(this).children('.links').css("visibility", "inherit");
+		$(this).children('.plus').text("-");
+	})
+	.mouseout(function(){
+		$(this).children('.links').css("visibility", "hidden");
+		$(this).children('.plus').text("+");
 
-  });
+	});
+
+	 $('#weeks').DataTable( {
+		"sScrollY": "300px",
+		"paging": false,
+		"scrollX": true,
+		"order": [[ 2, "desc" ]]
+	} );
 });
