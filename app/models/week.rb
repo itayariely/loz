@@ -1,7 +1,7 @@
 class Week < ActiveRecord::Base
 
   enum frequency: [ :פעם_בשבוע, :פעם_בשבועיים, :פעם_בשלושה_שבועות, :פעם_בחודש ]
-  enum tomezon: [ :בוקר, :צהריים, :אחרהצ, :ערב ]
+  enum tomezon: [ :בוקר, :צהריים, :אחרהצ, :ערב, :גמיש ]
 
   has_many :circul_week_relations, :dependent => :destroy
   has_many :circuls, :through => :circul_week_relations
