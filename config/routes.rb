@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   resources :friends
   resources :weeks
 
+
+  resources :home, only: [:index]
+match "home/data", :to => "home#data", :as => "data", :via => "get"
+
+
   resources :events do
   	member do
         post :approved

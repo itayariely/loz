@@ -4,12 +4,14 @@
   <title>Loz</title>
   <%= include_gon %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'dhtmlxgantt', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'dhtmlxgantt', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body dir="rtl">
   <%= render 'layouts/navbar' %>
-  
+
   <div id="main-container" class="container">
     <div class="row">
 
