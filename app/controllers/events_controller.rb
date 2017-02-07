@@ -87,7 +87,72 @@ class EventsController < ApplicationController
     redirect_to session.delete(:return_to) || :back, notice: " #{@event.name.to_s} בוטל"
   end
 
+  def data
+    calendars = Calendar.all
+    events = Event.all
+    render :json => events.map {|event| {
+           :id => event.id,
+           :start_date => event.start_at.to_formatted_s(:db),
+           :end_date => event.end_at.to_formatted_s(:db),
+           :text => event.name,
+           :section_id => event.section,
+           :color => event.color
 
+       }
+     }
+       #events.room_id
+  end
+
+  def db_action
+    mode = params["!nativeeditor_status"]
+    id = params["id"]
+    start_at = params["start_date"]
+    end_at = params["end_date"]
+    name = params["text"]
+    calendar_id = params["section_id"]
+    event_pid = params["id"]
+    parent_id = params["parent_id"]
+
+ case mode
+   when "inserted"
+    #  event = Event.create :start_at => start_at, :end_at => end_at, :name => name, :calendar_id => calendar_id, :parent_id => parent_id
+    event = Event.new
+    event.start_at = start_at
+    event.end_at = end_at
+    event.name = name
+    event.calendar_id = calendar_id
+    event.parent_id = parent_id if parent_id.present?
+    event.save!
+    tid = event.id
+
+   when "deleted"
+     Event.find(id).destroy
+     tid = id
+
+   when "updated"
+     event = Event.find(id)
+     event.start_at = start_at
+     event.end_at = end_at
+     event.name = name
+     event.calendar_id = calendar_id
+     event.parent_id = parent_id if parent_id.present?
+     event.save
+     tid = id
+ end
+ #
+ # render :json => {:action => {
+ #            :type => mode,
+ #            :sid => id.to_i,
+ #            :tid => tid.to_i,
+ #        }}
+ @mode = mode
+ @id = id
+ @tid = id
+ request.format = "xml"
+ respond_to do |format|
+   format.xml {render :layout => false}
+ end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -97,6 +162,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :start_at, :end_at, :note, :days, :nights, :place, :status, :color, :all_day, :description, :time, :mosa, :circul_ids => [], :friend_ids => [])
+      params.require(:event).permit(:name, :start_at, :end_at, :note, :days, :nights, :place, :status, :color, :all_day, :description, :time, :mosa, :calendar_id, :parent_id, :circul_ids => [], :friend_ids => [])
     end
 end

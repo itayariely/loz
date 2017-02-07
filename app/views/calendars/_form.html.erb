@@ -1,0 +1,14 @@
+<%= simple_form_for(@calendar) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :color %>
+    <%= f.input :description %>
+    <%= f.input :calendar_type, as: :select, collection: Calendar.calendar_types.keys %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

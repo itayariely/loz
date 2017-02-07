@@ -1,6 +1,6 @@
 <!-- <h3>סמינר לו"ז שנתי - v0.0.1</h3> -->
 <p>
-  <%= link_to "לרשימת החבררות והחברים", friends_path %>
+  <%= link_to "לרשימת החבררות והחברים", friends_path() %>
 </p>
 <p>
   +<%= link_to "הוספת חברות וחברים", new_friend_path %>
@@ -27,4 +27,8 @@
 
 <p>
   +<%= link_to "הוספת פגישה שבועית", new_week_path %>
+</p>
+<br />
+<p>
+  <%= link_to "ניהול לוז שנתי", schedule_path(1) %>
 </p>

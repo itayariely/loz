@@ -10,12 +10,24 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require dhtmlxscheduler
+//= require dhtmlxscheduler_limit
+//= require dhtmlxscheduler_multisection
+//= require dhtmlxscheduler_timeline
+//= require dhtmlxscheduler_treetimeline
+//= require dhtmlxscheduler_minical
+//= require dhtmlxscheduler_units
+//= require dhtmlxscheduler_editors
+//= require dhtmlxscheduler_quick_info
+//= require dhtmlxscheduler_tooltip
+//= require dhtmlxscheduler_active_links
+
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap-sprockets
-//= require jquery.turbolinks
-//= require turbolinks
+//  require jquery.turbolinks
+// require turbolinks
 //= require ckeditor-jquery
 //= require bootstrap-sprockets
 //= require dataTables/jquery.dataTables

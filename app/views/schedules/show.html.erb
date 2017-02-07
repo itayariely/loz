@@ -1,0 +1,223 @@
+<div dir=ltr id="scheduler_here" class="dhx_cal_container dhx_scheduler_timeline" style='width:100%; height:800px;'>
+  <div class="dhx_cal_navline">
+    <div class="dhx_cal_prev_button">&nbsp;</div>
+    <div class="dhx_cal_next_button">&nbsp;</div>
+    <div class="dhx_cal_today_button"></div>
+    <div class="btn btn-success" id="new_order" style="right:304px;">בקשה חדשה</div>
+    <div class="dhx_cal_date"></div>
+    <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+    <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
+    <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+    <div class="dhx_cal_tab dhx_cal_tab_standalone active" name="timeline_tab" style="right: auto; left: 211px;">Timeline</div>
+  </div>
+  <div class="dhx_cal_header"> </div>
+  <div class="dhx_cal_data"> </div>
+</div>
+
+
+
+<script>
+
+scheduler.locale.labels.timeline_tab = "Timeline";
+scheduler.locale.labels.section_custom="Section";
+scheduler.config.details_on_create=true;
+scheduler.config.details_on_dblclick=true;
+scheduler.config.xml_date="%Y-%m-%d %H:%i";
+
+//===============
+//Configuration
+//===============
+// var sections=[
+//   {key:1, label:"James Smith"},
+//   {key:2, label:"John Williams"},
+//   {key:3, label:"David Miller"},
+//   {key:4, label:"Linda Brown"}
+// ];
+// לייצר שורות באופן דינמי לפי יומנים
+// var sections = [];
+$.ajax({
+  url: '<%= calendars_path(format: :json) %>',
+  async: false,
+  dataType: 'json',
+  success: function (json) {
+    sections = json;
+  }
+});
+
+scheduler.createTimelineView({
+  // name:	"timeline",
+  // x_unit:	"minute",
+  // x_unit:	"day",
+  // x_date:	"%H:%i",
+  // x_step:	30,
+  // x_size: 24,
+  // x_start: 16,
+  // x_length:	48,
+  // y_unit:	sections,
+  // y_property:	"section_id",
+  // render:"bar"
+  name: 'timeline',
+  x_unit:   "day",//to appear the days of the month
+  x_date:   "%j", //number of the day
+  x_step:   1, //to show the all days
+  x_size: 31, // number of days in month( max)
+  x_start: 0, // zero offset from a current calendar date
+  x_length: 31, //the number of days that goes back and forward on prev and next button
+  y_unit: sections,
+  section_autoheight: false,
+  y_property: "section_id",
+  render:"bar",
+  event_dy: "full"
+});
+
+
+// scheduler.attachEvent("onEventSave",function(id,ev,is_new){
+//     if (!ev.text) {
+//         alert("Text must not be empty");
+//         return false;
+//     }
+//     if (!ev.text.length<20) {
+//         alert("Text too small");
+//         return false;
+//     }
+//     return true;
+// })
+// scheduler.config.readonly = true;
+// scheduler.config.readonly_form = true;
+
+    scheduler.config.xml_date="%Y-%m-%d %H:%i";
+    scheduler.init("scheduler_here",new Date(2017,0,18),"timeline");
+    scheduler.load("<%= data_events_path %>", "json");
+    var dp = new dataProcessor("<%= db_action_events_path %>");
+    dp.init(scheduler);
+    // dp.setTransactionMode("GET", false);
+    // dp.setTransactionMode("POST",false);
+    // dp.attachEvent("onAfterUpdateFinish",function(){
+    //   scheduler.clearAll();
+    //   scheduler.load("<%= data_events_path %>", 'json');
+    // })
+    dp.setTransactionMode("REST");
+
+    scheduler.attachEvent("onEventChanged", function(id,ev){
+    //any custom logic here
+    console.log("aaaaaaaaaaa");
+
+    // var startDate = ev.start_date;
+    // var endDate = ev.end_date;
+    // dp.setUpdated(id, true, "updated");
+    })
+    dp.attachEvent("onAfterUpdateFinish",function(){
+      console.log("bbbbbbbbbbbbb");
+       scheduler.clearAll();
+       scheduler.load("<%= data_events_path %>", 'json');
+
+
+      $.getJSON( "<%= conflicts_path(format: :json) %>", function( json ) {
+
+        $.each(json, function (key, val){
+          $( "<li>" ).html("<span class='btn btn-danger btn-xs'>" + val.event.name + "<br />" + "(" + val.event.start_at + " - " + val.event.end_at + ")" + "</span>" + " - " + "<span class='btn btn-danger btn-xs'>" +  val.event_sec.name + "<br / />" + "(" + val.event_sec.start_at + " - " + val.event_sec.end_at + ")" + "</span>" ).appendTo( "#conflicts" );
+        })
+
+       });
+     })
+
+
+
+     scheduler.form_blocks["my_editor"]={
+         render:function(sns){
+            //  return "<div class='dhx_cal_ltext' style='height:60px;'>Text&nbsp;<input type='text'><br/>Details&nbsp;<input type='text'><br/>Parent&nbsp;<input type='text'></div>";
+            return "<div class='dhx_cal_ltext' style='height:60px;'>Text&nbsp;<input type='text'><br/>Details&nbsp;<input type='text'></div>";
+         },
+         set_value:function(node,value,ev){
+             node.childNodes[1].value=value||"";
+             node.childNodes[4].value=ev.details||"";
+             node.childNodes[7].value=ev.parent_id||"";
+         },
+         get_value:function(node,ev){
+             ev.location = node.childNodes[4].value;
+             ev.parent_id = node.childNodes[7].value;
+             return node.childNodes[1].value;
+         },
+         focus:function(node){
+             var a=node.childNodes[1]; a.select(); a.focus();
+         }
+     }
+     scheduler.config.lightbox.sections=[
+         { name:"description", height:500, map_to:"text", type:"my_editor" , focus:true},
+          { name:"parent",    height:43, type:"select", map_to:"parent_id", options:[
+    {key:"", label:"Do not repeat"},
+    {key:"day", label:"Each day"},
+    {key:"week", label:"Each week"},
+    {key:"month", label:"Each month"}
+]},
+         { name:"time", height:72, type:"time", map_to:"auto"}
+     ]
+
+
+
+
+     function isTimelineView(){
+        //scheduler.matrix stores configurations of all timelines, added to the scheduler
+        //so, if current view is found in this container - then it's timeline
+        return !!scheduler.matrix[scheduler.getState().mode];
+     }
+
+     var editableSection = <%= Calendar.order_for.last.id %>;
+
+     //readonly form
+     scheduler.attachEvent("onDblClick", function(id){
+        if(!isTimelineView()) return true;
+
+        if(id && scheduler.getEvent(id)){
+           var ev = scheduler.getEvent(id);
+           if(ev.section_id != editableSection){
+              scheduler.config.readonly_form = false;
+           }else{
+              scheduler.config.readonly_form = true;
+           }
+        }
+        return true;
+     });
+
+     //resize and create by dragging area
+     scheduler.attachEvent("onBeforeDrag", function (event_id, mode, e){
+        if(!isTimelineView()) return true;
+
+        return (scheduler.getActionData(e).section != editableSection);
+     });
+     //double-click on empty space
+     scheduler.attachEvent("onEmptyClick", function (date, e){
+        if(!isTimelineView()) return true;
+
+        var section = scheduler.getActionData(e).section;
+        if(section != editableSection){
+           scheduler.config.dblclick_create = true;
+        }else{
+           scheduler.config.dblclick_create = false;
+        }
+     });
+
+
+
+     </script>
+
+
+
+<style type="text/css" media="screen">
+    /*html, body{
+        margin:0px;
+        padding:0px;
+        height:100%;
+        overflow:hidden;
+    }*/
+</style>
+<div id="new_order_div" style="display:none">
+  <%# render partial: "schedules/form" %>
+</div>
+<ul id="conflicts">
+
+</ul>
+<% open_orders = Event.where(calendar_id:Calendar.order_for.last.id).draft %>
+<% open_orders_struct = Struct.new(:key, :label) %>
+<%= a = open_orders.map { |x| "\"key\": #{x.id}, \"label\": #{x.name}" } %>
+<%= JSON.parse(a[0],:symbolize_names => true) %>

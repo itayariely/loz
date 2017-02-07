@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613080751) do
+ActiveRecord::Schema.define(version: 20170206083122) do
+
+  create_table "calendars", force: :cascade do |t|
+    t.string   "name"
+    t.string   "color"
+    t.text     "description"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "calendar_type"
+  end
 
   create_table "circul_week_relations", force: :cascade do |t|
     t.integer  "circul_id"
@@ -26,6 +35,13 @@ ActiveRecord::Schema.define(version: 20160613080751) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.string   "color"
+  end
+
+  create_table "conflicts", force: :cascade do |t|
+    t.integer  "first_event_id"
+    t.integer  "second_event_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -44,6 +60,8 @@ ActiveRecord::Schema.define(version: 20160613080751) do
     t.text     "description"
     t.integer  "time"
     t.integer  "mosa"
+    t.integer  "calendar_id"
+    t.integer  "parent_id"
   end
 
   create_table "events_circuls", force: :cascade do |t|
@@ -53,6 +71,8 @@ ActiveRecord::Schema.define(version: 20160613080751) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "events_circuls", ["event_id", "circul_id"], name: "index_events_circuls_on_event_id_and_circul_id"
 
   create_table "events_friends", force: :cascade do |t|
     t.integer  "friend_id"
@@ -86,6 +106,8 @@ ActiveRecord::Schema.define(version: 20160613080751) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "friends_circuls", ["friend_id", "circul_id"], name: "index_friends_circuls_on_friend_id_and_circul_id"
 
   create_table "week_days", force: :cascade do |t|
     t.integer  "week_id"

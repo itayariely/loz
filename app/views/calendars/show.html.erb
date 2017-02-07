@@ -1,23 +1,19 @@
-<%= link_to "new event", new_event_path %>
+<p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Name:</strong>
+  <%= @calendar.name %>
+</p>
 
+<p>
+  <strong>Color:</strong>
+  <%= @calendar.color %>
+</p>
 
-<div id='calendar'></div>
+<p>
+  <strong>Description:</strong>
+  <%= @calendar.description %>
+</p>
 
-<script>
-b = {title: "a", start: "2016-04-12"}
- alert(gon.events)
-$('#calendar').fullCalendar({
-  // put your options and callbacks here
-  header: {
-    left: 'prev,next today',
-    center: 'title',
-    right: 'month,agendaWeek,agendaDay'
-  },
-  defaultDate: '2016-04-12',
-  editable: true,
-  eventLimit: true, // allow "more" link when too many events
-  events: [
-    ]
-});
-</script>
+<%= link_to 'Edit', edit_calendar_path(@calendar) %> |
+<%= link_to 'Back', calendars_path %>
