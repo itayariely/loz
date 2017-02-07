@@ -217,7 +217,8 @@ scheduler.createTimelineView({
 <ul id="conflicts">
 
 </ul>
-<% open_orders = Event.where(calendar_id:Calendar.order_for.last.id).draft %>
-<% open_orders_struct = Struct.new(:key, :label) %>
-<%= a = open_orders.map { |x| "\"key\": #{x.id}, \"label\": #{x.name}" } %>
-<%= JSON.parse(a[0],:symbolize_names => true) %>
+<% open_orders = Event.where(calendar_id: Calendar.order_for.last.id).draft %>
+<% if open_orders.any? %>
+  <%= a = open_orders.map { |x| "\"key\": #{x.id}, \"label\": #{x.name}" } %>
+  <%= JSON.parse(a[0],:symbolize_names => true) %>
+<% end %>
