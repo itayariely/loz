@@ -21,10 +21,18 @@ class Event < ActiveRecord::Base
   has_many :conflicts_sec, class_name: "Conflict", foreign_key: "second_event_id"
   accepts_nested_attributes_for :conflicts_sec, :allow_destroy => true
 
+  before_validation :get_details
   after_save :get_parent_dependencies
   after_save :kill_all_conflicts
   after_save :check_for_conflicts
   after_save :change_color
+
+  def get_details
+    if self.parent_id.present?
+      self.days = self.parent.days
+      self.nights = self.parent.nights
+    end
+  end
 
   def section
     calendar_id.present? ? calendar_id : Calendar.order_for.last.id
@@ -41,7 +49,9 @@ validates :name, :start_at, :end_at,  presence: true
 validates :days, :nights, presence: true, if: :it_is_request
 
 def it_is_request
-  Calendar.find(self.calendar_id).order_for?
+  if self.calendar_id.present?
+    Calendar.find(self.calendar_id).order_for?
+  end
 end
 
 
@@ -103,15 +113,18 @@ end
   def change_color
     event = Event.find(self.id)
     if event.conflicts.any?
-        event.update_columns color: "#ff4c4c"
-        event.conflicts.each do |conflict|
-          conflict.event_sec.update_columns color: "#ff4c4c"
-        end
+      event.update_columns color: "#ff4c4c"
+      event.conflicts.each do |conflict|
+        conflict.event_sec.update_columns color: "#ff4c4c"
+      end
     end
     if event.conflicts_sec.any?
       event.conflicts_sec.any.each do |conflict|
         conflict.event.update_columns color: "#ff4c4c"
       end
+    end
+    if event.approved?
+      event.update_columns color: "#73B43A" if event.calendar.order_for?
     end
   end
 end

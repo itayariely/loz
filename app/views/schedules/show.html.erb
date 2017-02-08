@@ -115,7 +115,7 @@ scheduler.createTimelineView({
       $.getJSON( "<%= conflicts_path(format: :json) %>", function( json ) {
 
         $.each(json, function (key, val){
-          $( "<li>" ).html("<span class='btn btn-danger btn-xs'>" + val.event.name + "<br />" + "(" + val.event.start_at + " - " + val.event.end_at + ")" + "</span>" + " - " + "<span class='btn btn-danger btn-xs'>" +  val.event_sec.name + "<br / />" + "(" + val.event_sec.start_at + " - " + val.event_sec.end_at + ")" + "</span>" ).appendTo( "#conflicts" );
+          $( "<li>" ).html("<span class='btn btn-danger btn-xs'>" + val.event.name + "<br />" + "(" + val.event.start_at + " - " + val.event.end_at + ")" + "</span>" + " - " + "<span class='btn btn-danger btn-xs'>" +  val.event_sec.name + "<br />" + "(" + val.event_sec.start_at + " - " + val.event_sec.end_at + ")" + "</span>" ).appendTo( "#conflicts" );
         })
 
        });
@@ -131,11 +131,11 @@ scheduler.createTimelineView({
          set_value:function(node,value,ev){
              node.childNodes[1].value=value||"";
              node.childNodes[4].value=ev.details||"";
-             node.childNodes[7].value=ev.parent_id||"";
+            //  node.childNodes[7].value=ev.parent_id||"";
          },
          get_value:function(node,ev){
              ev.location = node.childNodes[4].value;
-             ev.parent_id = node.childNodes[7].value;
+            //  ev.parent_id = node.childNodes[7].value;
              return node.childNodes[1].value;
          },
          focus:function(node){
@@ -145,11 +145,15 @@ scheduler.createTimelineView({
      scheduler.config.lightbox.sections=[
          { name:"description", height:500, map_to:"text", type:"my_editor" , focus:true},
           { name:"parent",    height:43, type:"select", map_to:"parent_id", options:[
-    {key:"", label:"Do not repeat"},
-    {key:"day", label:"Each day"},
-    {key:"week", label:"Each week"},
-    {key:"month", label:"Each month"}
-]},
+            {key:"", label:"Do not repeat"},
+            <% open_orders = Event.where(calendar_id: Calendar.order_for.last.id).draft %>
+            <% open_orders.each do |oo| %>
+              <%=  "{ key:#{oo.id}, label:\"#{ oo.name }\" },".to_s.html_safe %>
+            <% end %>
+            // {key:"day", label:"Each day"},
+            // {key:"week", label:"Each week"},
+            // {key:"month", label:"Each month"}
+], class: "asd"},
          { name:"time", height:72, type:"time", map_to:"auto"}
      ]
 
@@ -164,7 +168,9 @@ scheduler.createTimelineView({
 
      var editableSection = <%= Calendar.order_for.last.id %>;
 
-     //readonly form
+
+     //
+    //  //readonly form
      scheduler.attachEvent("onDblClick", function(id){
         if(!isTimelineView()) return true;
 
@@ -215,10 +221,20 @@ scheduler.createTimelineView({
   <%# render partial: "schedules/form" %>
 </div>
 <ul id="conflicts">
-
+  <% Conflict.all.each do |conflict| %>
+  <li>
+    <span class='btn btn-danger btn-xs'>
+      <%= conflict.event.name %>
+      <br />
+      <%= "( #{conflict.event.start_at} - #{conflict.event.end_at} )" %>
+    </span>
+     -
+     <span class='btn btn-danger btn-xs'>
+       <%= conflict.event_sec.name %>
+       <br />
+       <%= "( #{conflict.event_sec.start_at} - #{conflict.event_sec.end_at} )" %>
+     </span>
+    <%# conflict %>
+  </li><br />
+  <% end %>
 </ul>
-<% open_orders = Event.where(calendar_id: Calendar.order_for.last.id).draft %>
-<% if open_orders.any? %>
-  <%= a = open_orders.map { |x| "\"key\": #{x.id}, \"label\": #{x.name}" } %>
-  <%= JSON.parse(a[0],:symbolize_names => true) %>
-<% end %>
