@@ -1,34 +1,40 @@
 <%= simple_form_for(@event) do |f| %>
+<div class="row">
 
-  <div class="field">
-    <%= f.input :name, label: "שם:" %>
-  </div>
-  <div class="field">
-    <%= f.input :days, label: "כמה ימים יהיה:" %>
-  </div>
-  <div class="field">
+  <div class="field col-md-2">
     <%= f.input :nights, label: "כמה לילות יהיה:" %>
   </div>
-  <div class="field">
-    <%= f.input :start_at, label: "הכי מוקדם יתחיל ב:" %><br>
-    <%# f.text_field :start_at, 'data-provide'=>'datepicker', :class => "datepicker_format" %>
+  <div class="field col-md-2">
+    <%= f.input :days, label: "כמה ימים יהיה:" %>
   </div>
-  <div class="field">
+  <div class="field col-md-8">
+    <%= f.input :name, label: "שם:" %>
+  </div>
+</div>
+<div class="row">
+
+  <div class="field col-md-2">
+    <%= f.input :mosa, as: :select, label: "מיועד ל:", collection: Event.mosas.keys.to_a  %>
+  </div>
+  <div class="field col-md-2">
+    <%= f.input :time, as: :select, label: "מתי:", collection: Event.times.keys.to_a  %>
+  </div>
+  <div class="field col-md-4">
     <%= f.input :end_at, label: "לכל המאוחר יסתיים ב:" %><br>
     <%# f.text_field :end_at, 'data-provide'=>'datepicker', :class => "datepicker_format" %>
     <%# f.text_field :end_at %>
   </div>
-  <div class="field">
-    <%= f.select :time, Event.times.keys.to_a  %>
+  <div class="field col-md-4">
+    <%= f.input :start_at, label: "הכי מוקדם יתחיל ב:" %><br>
+    <%# f.text_field :start_at, 'data-provide'=>'datepicker', :class => "datepicker_format" %>
   </div>
-  <div class="field">
-    <%= f.select :mosa, Event.mosas.keys.to_a  %>
-  </div>
+</div>
+<div class="row">
 
-  <div class="field">
-    <%= f.label "הערות:" %><br>
-    <%= f.text_area :note %>
+  <div class="field col-md-12">
+    <%= f.input :note, as: :text, label: "הערות:" %>
   </div>
+</div>
   <div class="field hidden">
     <%= f.label "מיקום" %><br>
     <%= f.text_field :place %>
@@ -41,36 +47,62 @@
     <%= f.label "צבע" %><br>
     <%= f.text_field :color %>
   </div>
+  <div class="field hidden">
+    <%= f.input :calendar_id, input_html:{value: Calendar.order_for.last.id} %>
+  </div>
   <div class="field">
 
     <%= f.label "מיועד למעגלים:" %><br>
+<div>
+  <ul class="tree">
 
-<div class="row">
+      <% @circuls = Circul.where(father_circul_id: [0, nil]).order(:name) %>
+      <% ids = @event.circuls.map &:id %>
+      <% @circuls.each do |circul| %>
+      <li>
+
+          <% if ids.include? circul.id %>
+            <%= check_box_tag 'event[circul_ids][]', circul.id, true, id: "event_circul_ids_#{circul.id}" %>
+          <% else %>
+            <%= check_box_tag 'event[circul_ids][]', circul.id, false, id: "event_circul_ids_#{circul.id}" %>
+          <% end %>
+
+        <%= h circul.name %>
+        <% if circul.children.any? %>
+        <% @par = "event" %>
+        <%= render circul %>
+        <% end %>
+      </li>
+      <% end %>
+
+  </ul>
+</div>
+<div class="row hidden">
   <table class="table">
     <tr>
-        <% i = 1 %>
-        <%= f.collection_check_boxes :circul_ids, Circul.all, :id, :initial_name do |ff| %>
-                <%# f.collection_check_boxes(:circul_ids, Circul.all, :id, :initial_name) do |ff| %>
-          <% if i == 8 %>
-            <%= "</tr><tr>".html_safe %>
-            <% i = 1 %>
-          <% end %>
-          <%= ff.label(class: "check_box") do %>
-            <td>
-              <%= ff.check_box(class: "check_box") %>
-              <%= ff.object.name %>
-            </td>
-          <% end %>
-          <% i = i+1 %>
-        <% end %>
+        <%# i = 1 %>
+        <%# f.collection_check_boxes :circul_ids, Circul.all, :id, :initial_name do |ff| %>
+          <%# if i == 8 %>
+            <%# "</tr><tr>".html_safe %>
+            <%# i = 1 %>
+          <%# end %>
+          <%# ff.label(class: "check_box") do %>
+            <!-- <td> -->
+              <%# ff.check_box(class: "check_box") %>
+              <%# ff.object.name %>
+            <!-- </td> -->
+          <%# end %>
+          <%# i = i+1 %>
+        <%# end %>
 
     </tr>
   </table>
 </div>
 
 
-<%= f.label "מיועד לחברות וחברים:" %><br>
 <div class="row">
+  <br /><br />
+  <%= f.label "מיועד לחברות וחברים:" %><br />
   <table class="table">
     <tr>
         <% i = 1 %>
@@ -96,7 +128,7 @@
 
   </div>
   <div class="actions">
-    <%= f.submit "שמירה" %>
+    <%= f.button :submit, "שמירה", class: "btn btn-success" %>
   </div>
 <% end %>
 <script>

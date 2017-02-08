@@ -41,7 +41,7 @@ validates :name, :start_at, :end_at,  presence: true
 validates :days, :nights, presence: true, if: :it_is_request
 
 def it_is_request
-  self.calendar.order_for?
+  Calendar.find(self.calendar_id).order_for?
 end
 
 

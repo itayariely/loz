@@ -1,43 +1,67 @@
 <% if @par == "circuls" %>
-<ul>
-<% circul.children.each do |child| %>
+  <ul>
+  <% circul.children.each do |child| %>
 
-<li>
-    <div class="links_shower">
-      <%= link_to child.name, child %>
-      <span class="plus">+</span>
-      <span class="links">
-        <%= link_to 'עריכה', edit_circul_path(circul) %>
-        <%#= link_to 'מחיקה', circul, method: :delete, data: { confirm: 'למחוק?' } %>
-      </span>
-    </div>
-    <%= render child if child.children.present? %>
-</li>
+  <li>
+      <div class="links_shower">
+        <%= link_to child.name, child %>
+        <span class="plus">+</span>
+        <span class="links">
+          <%= link_to 'עריכה', edit_circul_path(circul) %>
+          <%#= link_to 'מחיקה', circul, method: :delete, data: { confirm: 'למחוק?' } %>
+        </span>
+      </div>
+      <%= render child if child.children.present? %>
+  </li>
 
 
-<% end %>
-</ul>
+  <% end %>
+  </ul>
 <% elsif @par == "friends" %>
-<ul>
-<% circul.children.each do |child| %>
+  <ul>
+  <% circul.children.each do |child| %>
 
-<li>
-  <% if params[:search] %>
-    <% b = eval params[:search].to_s.gsub('"', '') %>
-    <% if b.include? child.id %>
-      <%= check_box_tag 'search[]', child.id, true %>
+  <li>
+    <% if params[:search] %>
+      <% b = eval params[:search].to_s.gsub('"', '') %>
+      <% if b.include? child.id %>
+        <%= check_box_tag 'search[]', child.id, true %>
+      <% else %>
+        <%= check_box_tag 'search[]', child.id %>
+      <% end %>
     <% else %>
       <%= check_box_tag 'search[]', child.id %>
     <% end %>
-  <% else %>
-    <%= check_box_tag 'search[]', child.id %>
+
+    <%= h child.name %>
+        <%= render child if child.children.present? %>
+  </li>
+
+
   <% end %>
+  </ul>
 
-  <%= h child.name %>
-      <%= render child if child.children.present? %>
-</li>
+<% elsif @par == "event" %>
+
+  <% ids = @event.circuls.map &:id %>
+  <ul>
+  <% circul.children.each do |child| %>
+
+  <li>
+
+    <% if ids.include? child.id %>
+    <%= check_box_tag 'event[circul_ids][]', child.id, true, id: "event_circul_ids_#{child.id}" %>
+    <% else %>
+    <%= check_box_tag 'event[circul_ids][]', child.id, false, id: "event_circul_ids_#{child.id}" %>
+    <% end %>
+
+    <%= h child.name %>
+        <%= render child if child.children.present? %>
+  </li>
 
 
-<% end %>
-</ul>
+  <% end %>
+  </ul>
+
+
 <% end %>
