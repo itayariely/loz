@@ -41,7 +41,7 @@
   </div>
   <div class="field hidden">
     <%= f.label "מצב" %><br>
-    <%= f.input :status, input_html:{value: :draft } %>
+    <%= f.input :status, as: :hidden, input_html:{value: "draft" } %>
   </div>
   <div class="field hidden">
     <%= f.label "צבע" %><br>
